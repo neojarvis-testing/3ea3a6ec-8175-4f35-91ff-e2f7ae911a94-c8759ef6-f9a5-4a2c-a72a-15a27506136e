@@ -8,9 +8,8 @@ namespace dotnetapp.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class LoanController : ControllerBase
+    public class LoanApplicationController : ControllerBase
     {
-        private readonly ApplicationDbContext db;
         
     }
 }
