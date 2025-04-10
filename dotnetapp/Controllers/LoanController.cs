@@ -8,7 +8,7 @@ namespace dotnetapp.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class LoanController : ControllerBas
+    public class LoanController : ControllerBase
     {
         
     }
