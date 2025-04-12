@@ -10,6 +10,5 @@ namespace dotnetapp.Controllers
     [Route("api/[controller]")]
     public class LoanController : ControllerBase
     {
-    
     }
 }
