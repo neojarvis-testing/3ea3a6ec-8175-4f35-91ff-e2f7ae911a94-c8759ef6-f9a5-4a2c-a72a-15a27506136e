@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using dotnetapp.Models;
 
 public interface IAuthService
 {
