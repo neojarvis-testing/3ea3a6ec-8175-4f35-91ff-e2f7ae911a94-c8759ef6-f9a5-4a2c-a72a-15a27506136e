@@ -40,11 +40,13 @@ namespace dotnetapp.Services
                 return (0, "User already exists");
             }
 
+            // Ensure the Name property is properly set
             ApplicationUser user = new ApplicationUser()
             {
                 Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
-                UserName = model.Username
+                UserName = model.Username,
+                Name = model.Name // Set the Name property explicitly
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
@@ -66,50 +68,64 @@ namespace dotnetapp.Services
             return (1, "User created successfully!");
         }
 
-        // Corrected Login method
-        public async Task<(int, string)> Login(LoginModel model)
-        {
-            var user = await _userManager.FindByEmailAsync(model.Email);
-            if (user == null)
-            {
-                return (0, "Invalid email");
-            }
+        // Login method
+    public async Task<(int, string)> Login(LoginModel model)
+    {
+    // Validate input
+    if (string.IsNullOrEmpty(model.Email) || string.IsNullOrEmpty(model.Password))
+    {
+        return (0, "Email or password cannot be null or empty.");
+    }
 
-            if (!await _userManager.CheckPasswordAsync(user, model.Password))
-            {
-                return (0, "Invalid password");
-            }
+    // Check if the user exists
+    var user = await _userManager.FindByEmailAsync(model.Email);
+    if (user == null)
+    {
+        return (0, "Invalid email.");
+    }
 
-            var userRoles = await _userManager.GetRolesAsync(user);
-            var authClaims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            };
+    // Verify password
+    if (!await _userManager.CheckPasswordAsync(user, model.Password))
+    {
+        return (0, "Invalid password.");
+    }
 
-            foreach (var userRole in userRoles)
-            {
-                authClaims.Add(new Claim(ClaimTypes.Role, userRole));
-            }
+    // Generate claims for the JWT token
+    var userRoles = await _userManager.GetRolesAsync(user);
+    var authClaims = new List<Claim>
+    {
+        new Claim(ClaimTypes.Name, user.UserName),
+        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+    };
 
-            // Declare and initialize the token variable using GenerateToken
-            string token = GenerateToken(authClaims);
-            return (1, token);
-        }
+    foreach (var userRole in userRoles)
+    {
+        authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+    }
+
+    // Generate and return the token
+    string token = GenerateToken(authClaims);
+    return (1, token);
+    }
 
         // Method to generate JWT token
         private string GenerateToken(IEnumerable<Claim> claims)
+    {
+        if (claims == null || !claims.Any())
         {
-            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
-            var token = new JwtSecurityToken(
-                issuer: _configuration["JWT:ValidIssuer"],
-                audience: _configuration["JWT:ValidAudience"],
-                expires: DateTime.Now.AddHours(3),
-                claims: claims,
-                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-            );
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            throw new ArgumentException("Claims cannot be null or empty.", nameof(claims));
         }
+
+        var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
+        var token = new JwtSecurityToken(
+            issuer: _configuration["JWT:ValidIssuer"],
+            audience: _configuration["JWT:ValidAudience"],
+            expires: DateTime.Now.AddHours(3),
+            claims: claims,
+            signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+        );
+
+        return new JwtSecurityTokenHandler().WriteToken(token);
+    }
     }
 }

@@ -8,9 +8,11 @@ using System.Text;
 using System.Configuration; 
 using Microsoft.AspNetCore.Authentication.JwtBearer; 
 using Microsoft.IdentityModel.Tokens; 
+using Microsoft.AspNetCore.Identity;
 using dotnetapp.Models;
 using dotnetapp.Data;
 using Microsoft.EntityFrameworkCore;
+using dotnetapp.Services;
 
 var builder = WebApplication.CreateBuilder(args); 
 
@@ -20,6 +22,7 @@ builder.Services.AddControllers()
     .AddJsonOptions(opt=> { 
       opt.JsonSerializerOptions.PropertyNamingPolicy=null; 
     }); 
+    
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle 
 
@@ -52,6 +55,16 @@ builder.Services.AddAuthentication(x=>{
   }; 
 }); 
 
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
+// Register custom services
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<FeedbackService>();
+builder.Services.AddScoped<LoanService>();
+builder.Services.AddScoped<LoanApplicationService>();
+ 
 var app = builder.Build(); 
 
 // Configure the HTTP request pipeline. 

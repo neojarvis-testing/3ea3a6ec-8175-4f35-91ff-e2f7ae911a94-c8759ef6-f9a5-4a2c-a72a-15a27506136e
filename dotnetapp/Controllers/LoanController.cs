@@ -6,6 +6,7 @@ using dotnetapp.Exceptions;
 using dotnetapp.Services;
 using dotnetapp.Models;
 using dotnetapp.Data;
+
 namespace dotnetapp.Controllers{
 [ApiController]
 [Route("api/[controller]")]

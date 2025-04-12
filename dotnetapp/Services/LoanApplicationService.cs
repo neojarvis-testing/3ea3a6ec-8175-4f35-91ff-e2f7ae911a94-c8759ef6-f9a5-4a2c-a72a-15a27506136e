@@ -46,20 +46,25 @@ public class LoanApplicationService
 
     public async Task<bool> UpdateLoanApplication(int loanApplicationId, LoanApplication loanApplication)
     {
-        var existingLoanApplication = await _context.LoanApplications
-            .FirstOrDefaultAsync(la => la.LoanApplicationId == loanApplicationId);
+    var existingLoanApplication = await _context.LoanApplications
+        .FirstOrDefaultAsync(la => la.LoanApplicationId == loanApplicationId);
 
-        if (existingLoanApplication == null)
-        {
-            return false;
-        }
+    if (existingLoanApplication == null)
+    {
+        return false;
+    }
 
-        
-        existingLoanApplication.LoanStatus = loanApplication.LoanStatus;
-       
+    // Update all relevant fields
+    existingLoanApplication.LoanStatus = loanApplication.LoanStatus;
+    existingLoanApplication.FarmLocation = loanApplication.FarmLocation;
+    existingLoanApplication.FarmerAddress = loanApplication.FarmerAddress;
+    existingLoanApplication.FarmSizeInAcres = loanApplication.FarmSizeInAcres;
+    existingLoanApplication.FarmPurpose = loanApplication.FarmPurpose;
+    existingLoanApplication.SubmissionDate = loanApplication.SubmissionDate;
+    existingLoanApplication.File = loanApplication.File; 
 
-        await _context.SaveChangesAsync();
-        return true;
+    await _context.SaveChangesAsync();
+    return true;
     }
 
     public async Task<bool> DeleteLoanApplication(int loanApplicationId)
