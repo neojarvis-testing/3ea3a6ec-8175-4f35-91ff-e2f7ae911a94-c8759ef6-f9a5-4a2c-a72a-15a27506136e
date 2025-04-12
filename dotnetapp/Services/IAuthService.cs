@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace dotnetapp.Data
+namespace dotnetapp.Services
 {
-    public class ApplicationDbContext
+    public class IAuthService
     {
         
     }

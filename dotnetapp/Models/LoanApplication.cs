@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace dotnetapp.Data
+namespace dotnetapp.Models
 {
-    public class ApplicationDbContext
+    public class LoanApplication
     {
         
     }
