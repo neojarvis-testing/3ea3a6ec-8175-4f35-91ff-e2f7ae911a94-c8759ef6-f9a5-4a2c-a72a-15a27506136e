@@ -10,7 +10,7 @@ namespace dotnetapp.Controllers
     [Route("api/[controller]")]
     public class LoanController : ControllerBase
     {
-        private readonly ApplicationDbContext db;
+        //private readonly ApplicationDbContext db;
         
     }
 }
