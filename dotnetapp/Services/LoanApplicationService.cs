@@ -4,7 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using dotnetapp.Data;
 using dotnetapp.Models;
+using Microsoft.EntityFrameworkCore;
+using dotnetapp.Exceptions;
 
+namespace dotnetapp.Services{
 public class LoanApplicationService
 {
     private readonly ApplicationDbContext _context;
@@ -44,15 +47,15 @@ public class LoanApplicationService
     public async Task<bool> UpdateLoanApplication(int loanApplicationId, LoanApplication loanApplication)
     {
         var existingLoanApplication = await _context.LoanApplications
-            .FirstOrDefaultAsync(la => la.Id == loanApplicationId);
+            .FirstOrDefaultAsync(la => la.LoanApplicationId == loanApplicationId);
 
         if (existingLoanApplication == null)
         {
             return false;
         }
 
-        existingLoanApplication.LoanAmount = loanApplication.LoanAmount;
-        existingLoanApplication.Status = loanApplication.Status;
+        
+        existingLoanApplication.LoanStatus = loanApplication.LoanStatus;
        
 
         await _context.SaveChangesAsync();
@@ -62,7 +65,7 @@ public class LoanApplicationService
     public async Task<bool> DeleteLoanApplication(int loanApplicationId)
     {
         var existingLoanApplication = await _context.LoanApplications
-            .FirstOrDefaultAsync(la => la.Id == loanApplicationId);
+            .FirstOrDefaultAsync(la => la.LoanApplicationId == loanApplicationId);
 
         if (existingLoanApplication == null)
         {
@@ -73,4 +76,5 @@ public class LoanApplicationService
         await _context.SaveChangesAsync();
         return true;
     }
+}
 }

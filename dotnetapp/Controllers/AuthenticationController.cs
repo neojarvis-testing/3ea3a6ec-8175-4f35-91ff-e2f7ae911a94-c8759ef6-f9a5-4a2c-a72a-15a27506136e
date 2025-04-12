@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using dotnetapp.Services;
 using dotnetapp.Models;
-
+using dotnetapp.Services;
+using dotnetapp.Data;
+using dotnetapp.Models;
+namespace dotnetapp.Controllers
+{
 [ApiController]
 [Route("api/[controller]")]
 public class AuthenticationController : ControllerBase
@@ -49,4 +52,5 @@ public class AuthenticationController : ControllerBase
             return StatusCode(500, ex.Message);
         }
     }
+}
 }

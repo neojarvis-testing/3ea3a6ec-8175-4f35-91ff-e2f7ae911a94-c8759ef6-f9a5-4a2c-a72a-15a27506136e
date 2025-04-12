@@ -3,50 +3,54 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using dotnetapp.Services;
+using dotnetapp.Models;
+using dotnetapp.Data;
 
 namespace dotnetapp.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class FeedbackController : ControllerBase
-    {   
-        private readonly ApplicationDbContext _context;
-        public FeedbackService(ApplicationDbContext context)
+    {
+        private readonly FeedbackService _feedbackService;
+
+        // Constructor
+        public FeedbackController(ApplicationDbContext context)
         {
-            _context = context;
+            _feedbackService = new FeedbackService(context);
         }
 
         // Retrieves all feedbacks
+        [HttpGet("all")]
         public async Task<IEnumerable<Feedback>> GetAllFeedbacks()
         {
-            return await _context.Feedbacks.ToListAsync();
+            return await _feedbackService.GetAllFeedbacks();
         }
 
         // Retrieves feedbacks by UserId
+        [HttpGet("user/{userId}")]
         public async Task<IEnumerable<Feedback>> GetFeedbacksByUserId(int userId)
         {
-            return await _context.Feedbacks.Where(f => f.UserId == userId).ToListAsync();
+            return await _feedbackService.GetFeedbacksByUserId(userId);
         }
 
         // Adds new feedback
-        public async Task<bool> AddFeedback(Feedback feedback)
+        [HttpPost("add")]
+        public async Task<IActionResult> AddFeedback([FromBody] Feedback feedback)
         {
-            _context.Feedbacks.Add(feedback);
-            return await _context.SaveChangesAsync() > 0;
+            var result = await _feedbackService.AddFeedback(feedback);
+            if (result) return Ok("Feedback added successfully");
+            return BadRequest("Failed to add feedback");
         }
 
         // Deletes feedback by FeedbackId
-        public async Task<bool> DeleteFeedback(int feedbackId)
+        [HttpDelete("delete/{feedbackId}")]
+        public async Task<IActionResult> DeleteFeedback(int feedbackId)
         {
-            var feedback = await _context.Feedbacks.FindAsync(feedbackId);
-
-            if (feedback == null)
-            {
-                return false;
-            }
-
-            _context.Feedbacks.Remove(feedback);
-            return await _context.SaveChangesAsync() > 0;
+            var result = await _feedbackService.DeleteFeedback(feedbackId);
+            if (result) return Ok("Feedback deleted successfully");
+            return NotFound("Feedback not found");
         }
     }
 }

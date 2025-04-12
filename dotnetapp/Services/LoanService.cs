@@ -3,7 +3,9 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using dotnetapp.Data;
 using dotnetapp.Models;
+using dotnetapp.Exceptions;
 
+namespace dotnetapp.Services{
 public class LoanService
 {
     private readonly ApplicationDbContext _context;
@@ -25,7 +27,7 @@ public class LoanService
 
     public async Task<bool> AddLoan(Loan loan)
     {
-        if (await _context.Loans.AnyAsync(l => l.Type == loan.Type))
+        if (await _context.Loans.AnyAsync(l => l.LoanType == loan.LoanType))
         {
             throw new LoanException("Loan with the same type already exists");
         }
@@ -43,13 +45,13 @@ public class LoanService
             return false;
         }
 
-        if (await _context.Loans.AnyAsync(l => l.Type == loan.Type && l.Id != loanId))
+        if (await _context.Loans.AnyAsync(l => l.LoanType == loan.LoanType && l.LoanId != loanId))
         {
             throw new LoanException("Loan with the same type already exists");
         }
 
-        existingLoan.Type = loan.Type;
-        existingLoan.Amount = loan.Amount;
+        existingLoan.LoanType = loan.LoanType;
+        existingLoan.MaximumAmount = loan.MaximumAmount;
         // Update other properties as needed
 
         await _context.SaveChangesAsync();
@@ -74,5 +76,5 @@ public class LoanService
         return true;
     }
 }
-
+}
 

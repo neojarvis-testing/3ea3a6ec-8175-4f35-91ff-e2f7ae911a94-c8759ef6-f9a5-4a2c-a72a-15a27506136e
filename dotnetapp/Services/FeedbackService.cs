@@ -1,11 +1,11 @@
-
-
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using dotnetapp.Data;
 using dotnetapp.Models;
+using Microsoft.EntityFrameworkCore;
 
+namespace dotnetapp.Services{
 public class FeedbackService
 {
     private readonly ApplicationDbContext _context;
@@ -37,7 +37,7 @@ public class FeedbackService
     public async Task<bool> DeleteFeedback(int feedbackId)
     {
         var existingFeedback = await _context.Feedbacks
-            .FirstOrDefaultAsync(f => f.Id == feedbackId);
+            .FirstOrDefaultAsync(f => f.FeedbackId == feedbackId);
 
         if (existingFeedback == null)
         {
@@ -48,4 +48,5 @@ public class FeedbackService
         await _context.SaveChangesAsync();
         return true;
     }
+}
 }
