@@ -5,8 +5,11 @@ using System.Threading.Tasks;
 
 namespace dotnetapp.Exceptions
 {
-    public class LoanException
+    public class LoanException : Exception
     {
-        
+        public LoanException(string message) : base(message)
+        {
+            
+        }
     }
 }
