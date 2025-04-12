@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using dotnetapp.Models;
 using dotnetapp.Exceptions;
+using dotnetapp.Services;
+using dotnetapp.Models;
+using dotnetapp.Data;
 
+namespace dotnetapp.Controllers{
 [ApiController]
 [Route("api/[controller]")]
 public class LoanController : ControllerBase
@@ -112,4 +116,5 @@ public class LoanController : ControllerBase
             return StatusCode(500, ex.Message);
         }
     }
+}
 }

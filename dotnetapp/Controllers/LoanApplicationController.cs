@@ -4,7 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using dotnetapp.Exceptions; 
-
+using dotnetapp.Services;
+using dotnetapp.Models;
+using dotnetapp.Data;
+namespace dotnetapp.Controllers{
 [ApiController]
 [Route("api/[controller]")]
 public class LoanApplicationController : ControllerBase
@@ -105,5 +108,6 @@ public class LoanApplicationController : ControllerBase
             return StatusCode(500, ex.Message);
         }
     }
+}
 }
 
