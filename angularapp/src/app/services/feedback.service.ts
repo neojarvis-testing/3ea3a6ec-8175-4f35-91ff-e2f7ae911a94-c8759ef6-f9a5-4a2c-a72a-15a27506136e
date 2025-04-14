@@ -8,7 +8,7 @@ import { Feedback } from '../models/feedback.model';
 })
 export class FeedbackService {
   public apiUrl = '';
-
+  
   constructor(private http: HttpClient) { }
 
   sendFeedback(feedback: Feedback): Observable<Feedback> {
