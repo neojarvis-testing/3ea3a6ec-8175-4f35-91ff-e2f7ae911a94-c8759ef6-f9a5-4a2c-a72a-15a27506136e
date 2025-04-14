@@ -1,8 +1,8 @@
 export interface LoanApplication
 {
     LoanApplicationId? : number;
-    UserId: number;
-    LoadId: number;
+    UserId?: number;
+    LoanId?: number;
     SubmissionDate: string;
     LoanStatus: number;
     FarmLocation: string;

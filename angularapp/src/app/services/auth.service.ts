@@ -46,5 +46,10 @@ getUserIdFromToken(token: string): string | null {
    const payload = JSON.parse(atob(token.split('.')[1]));
    return payload.userId || null;
    }
+
+   getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
   }
   

@@ -8,8 +8,8 @@ import { LoanApplication } from '../models/loanapplication.model';
   providedIn: 'root'
 })
 export class LoanService {
-  private apiUrl = '';
-  private apiLoanApplicationUrl = '';
+  public apiUrl = '';
+  public apiLoanApplicationUrl = '';
 
   constructor(private http: HttpClient) { }
 
