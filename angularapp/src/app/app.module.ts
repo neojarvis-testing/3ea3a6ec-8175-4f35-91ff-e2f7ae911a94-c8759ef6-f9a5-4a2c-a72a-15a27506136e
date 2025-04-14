@@ -4,7 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdmineditloanComponent } from './components/admineditloan/admineditloan.component';
-import { AdminnavComponent } from './components/adminnav/adminnav.component';
+// import { AdminnavComponent } from './components/adminnav/adminnav.component';
+import { AdminNavComponent } from './components/adminnav/adminnav.component';
 import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
 import { CreateloanComponent } from './components/createloan/createloan.component';
 import { ErrorComponent } from './components/error/error.component';
@@ -21,12 +22,14 @@ import { UsernavComponent } from './components/usernav/usernav.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 import { UserviewloanComponent } from './components/userviewloan/userviewloan.component';
 import { ViewloanComponent } from './components/viewloan/viewloan.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdmineditloanComponent,
-    AdminnavComponent,
+    AdminNavComponent,
     AdminviewfeedbackComponent,
     CreateloanComponent,
     ErrorComponent,
@@ -46,7 +49,9 @@ import { ViewloanComponent } from './components/viewloan/viewloan.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

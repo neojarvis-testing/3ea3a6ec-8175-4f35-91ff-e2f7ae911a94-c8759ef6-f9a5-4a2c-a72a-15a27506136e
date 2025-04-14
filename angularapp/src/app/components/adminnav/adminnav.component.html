@@ -1,1 +1,25 @@
-<p>adminnav works!</p>
+<nav class="navbar">
+    <div class="nav-left">
+      <span class="logo">Loan Management System</span>
+    </div>
+    <div class="nav-center">
+      <ul class="nav-items">
+        <li
+          class="nav-item"
+          (mouseenter)="toggleLoanSubmenu(true)"
+          (mouseleave)="toggleLoanSubmenu(false)"
+        >
+          Loan
+          <ul class="submenu" *ngIf="showLoanSubmenu">
+            <li (click)="navigateTo('/createloan')">Add Loan</li>
+            <li (click)="navigateTo('/viewloan')">View Loan</li>
+          </ul>
+        </li>
+        <!-- Add other navigation items here if needed -->
+      </ul>
+    </div>
+    <div class="nav-right">
+      <span class="user-info">{{ username }} ({{ role }})</span>
+      <button (click)="logout()">Logout</button>
+    </div>
+  </nav>
