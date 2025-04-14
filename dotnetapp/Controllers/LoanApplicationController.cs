@@ -7,107 +7,114 @@ using dotnetapp.Exceptions;
 using dotnetapp.Services;
 using dotnetapp.Models;
 using dotnetapp.Data;
+using Microsoft.AspNetCore.Authorization;
+
 namespace dotnetapp.Controllers{
-[ApiController]
-[Route("api/[controller]")]
-public class LoanApplicationController : ControllerBase
-{
-    private readonly LoanApplicationService _loanApplicationService;
-
-    public LoanApplicationController(LoanApplicationService loanApplicationService)
+    [Authorize]
+    [ApiController]
+    [Route("api/[controller]")]
+    public class LoanApplicationController : ControllerBase
     {
-        _loanApplicationService = loanApplicationService;
-    }
+        private readonly LoanApplicationService _loanApplicationService;
 
-    [HttpGet("GetAllLoanApplications")]
-    public async Task<ActionResult<IEnumerable<LoanApplication>>> GetAllLoanApplications()
-    {
-        try
+        public LoanApplicationController(LoanApplicationService loanApplicationService)
         {
-            var loanApplications = await _loanApplicationService.GetAllLoanApplications();
-            return Ok(loanApplications);
+            _loanApplicationService = loanApplicationService;
         }
-        catch (Exception ex)
-        {
-            return StatusCode(500, ex.Message);
-        }
-    }
 
-    [HttpGet("GetLoanApplicationsByUserId/{userId}")]
-    public async Task<ActionResult<IEnumerable<LoanApplication>>> GetLoanApplicationByUserId(int userId)
-    {
-        try
+        [Authorize(Roles = "Admin")]
+        [HttpGet("GetAllLoanApplications")]
+        public async Task<ActionResult<IEnumerable<LoanApplication>>> GetAllLoanApplications()
         {
-            var loanApplications = await _loanApplicationService.GetLoanApplicationsByUserId(userId);
-            if (loanApplications == null || !loanApplications.Any())
+            try
             {
+                var loanApplications = await _loanApplicationService.GetAllLoanApplications();
+                return Ok(loanApplications);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [Authorize(Roles= "User")]
+        [HttpGet("GetLoanApplicationsByUserId/{userId}")]
+        public async Task<ActionResult<IEnumerable<LoanApplication>>> GetLoanApplicationByUserId(int userId)
+        {
+            try
+            {
+                var loanApplications = await _loanApplicationService.GetLoanApplicationsByUserId(userId);
+                if (loanApplications == null || !loanApplications.Any())
+                {
+                    return NotFound("Cannot find any loan application");
+                }
+                return Ok(loanApplications);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [Authorize(Roles= "User")]
+        [HttpPost("AddLoanApplication")]
+        public async Task<ActionResult> AddLoanApplication([FromBody] LoanApplication loanApplication)
+        {
+            try
+            {
+                var isAdded = await _loanApplicationService.AddLoanApplication(loanApplication);
+                if (isAdded)
+                {
+                    return Ok("Loan application added successfully");
+                }
+                return BadRequest("Failed to add loan application");
+            }
+            catch (LoanException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [Authorize(Roles= "Admin,User")]
+        [HttpPut("UpdateLoanApplication/{loanApplicationId}")]
+        public async Task<ActionResult> UpdateLoanApplication(int loanApplicationId, [FromBody] LoanApplication loanApplication)
+        {
+            try
+            {
+                var isUpdated = await _loanApplicationService.UpdateLoanApplication(loanApplicationId, loanApplication);
+                if (isUpdated)
+                {
+                    return Ok("Loan application updated successfully");
+                }
                 return NotFound("Cannot find any loan application");
             }
-            return Ok(loanApplications);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, ex.Message);
-        }
-    }
-
-    [HttpPost("AddLoanApplication")]
-    public async Task<ActionResult> AddLoanApplication([FromBody] LoanApplication loanApplication)
-    {
-        try
-        {
-            var isAdded = await _loanApplicationService.AddLoanApplication(loanApplication);
-            if (isAdded)
+            catch (Exception ex)
             {
-                return Ok("Loan application added successfully");
+                return StatusCode(500, ex.Message);
             }
-            return BadRequest("Failed to add loan application");
         }
-        catch (LoanException ex)
+        [Authorize(Roles= "User")]
+        [HttpDelete("DeleteLoanApplication/{loanApplicationId}")]
+        public async Task<ActionResult> DeleteLoanApplication(int loanApplicationId)
         {
-            return BadRequest(ex.Message);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, ex.Message);
-        }
-    }
-
-    [HttpPut("UpdateLoanApplication/{loanApplicationId}")]
-    public async Task<ActionResult> UpdateLoanApplication(int loanApplicationId, [FromBody] LoanApplication loanApplication)
-    {
-        try
-        {
-            var isUpdated = await _loanApplicationService.UpdateLoanApplication(loanApplicationId, loanApplication);
-            if (isUpdated)
+            try
             {
-                return Ok("Loan application updated successfully");
+                var isDeleted = await _loanApplicationService.DeleteLoanApplication(loanApplicationId);
+                if (isDeleted)
+                {
+                    return Ok("Loan application deleted successfully");
+                }
+                return NotFound("Cannot find any loan application");
             }
-            return NotFound("Cannot find any loan application");
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, ex.Message);
-        }
-    }
-
-    [HttpDelete("DeleteLoanApplication/{loanApplicationId}")]
-    public async Task<ActionResult> DeleteLoanApplication(int loanApplicationId)
-    {
-        try
-        {
-            var isDeleted = await _loanApplicationService.DeleteLoanApplication(loanApplicationId);
-            if (isDeleted)
+            catch (Exception ex)
             {
-                return Ok("Loan application deleted successfully");
+                return StatusCode(500, ex.Message);
             }
-            return NotFound("Cannot find any loan application");
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, ex.Message);
         }
     }
-}
 }
 

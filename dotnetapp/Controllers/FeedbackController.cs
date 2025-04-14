@@ -9,6 +9,7 @@ using dotnetapp.Services;
 using dotnetapp.Data;
 using dotnetapp.Exceptions;
 using Microsoft.AspNetCore.Authorization;
+
 namespace dotnetapp.Controllers
 {
     [Authorize]
