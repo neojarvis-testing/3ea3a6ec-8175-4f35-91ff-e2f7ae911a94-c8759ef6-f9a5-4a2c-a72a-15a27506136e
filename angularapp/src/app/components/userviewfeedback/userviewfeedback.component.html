@@ -1,1 +1,36 @@
-<p>userviewfeedback works!</p>
+<div class="container">
+    <h2>My Feedback</h2>
+   
+    <table>
+      <thead>
+        <tr>
+          <th>S. No</th>
+          <th>Feedback</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let feedback of feedbackList; index as i">
+          <td>{{ i + 1 }}</td>
+          <td>{{ feedback.text }}</td>
+          <td>
+  <button (click)="confirmDelete(feedback.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+   
+    <!-- Delete Confirmation Modal -->
+    <div *ngIf="showDeleteConfirm" class="modal">
+      <p>Are you sure you want to delete?</p>
+      <button (click)="deleteFeedback()">Yes, Delete</button>
+      <button (click)="cancelDelete()">Cancel</button>
+    </div>
+   
+    <!-- Logout Confirmation Modal -->
+    <div *ngIf="showLogoutConfirm" class="modal">
+      <p>Are you sure you want to logout?</p>
+      <button (click)="logout()">Yes, Logout</button>
+      <button (click)="cancelLogout()">Cancel</button>
+    </div>
+  </div>
