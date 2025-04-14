@@ -38,4 +38,13 @@ export class AuthService {
   getCurrentUserId(): Observable<number | null> {
     return this.currentUserId.asObservable();
   }
-}
+
+  
+getUserIdFromToken(token: string): string | null {
+   // Decode the token and extract the user ID
+   // This is a placeholder implementation. You should use a proper JWT library to decode the token.
+   const payload = JSON.parse(atob(token.split('.')[1]));
+   return payload.userId || null;
+   }
+  }
+  
