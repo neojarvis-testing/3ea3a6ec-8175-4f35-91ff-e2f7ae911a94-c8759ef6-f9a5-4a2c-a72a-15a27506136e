@@ -11,7 +11,7 @@ import { CreateloanComponent } from './components/createloan/createloan.componen
 import { ErrorComponent } from './components/error/error.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoanformComponent } from './components/loanform/loanform.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { RequestedloanComponent } from './components/requestedloan/requestedloan.component';
@@ -20,7 +20,7 @@ import { UserappliedloanComponent } from './components/userappliedloan/userappli
 
 import { UsernavComponent } from './components/usernav/usernav.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
-import { UserviewloanComponent } from './components/userviewloan/userviewloan.component';
+import { UserViewLoanComponent } from './components/userviewloan/userviewloan.component';
 import { ViewloanComponent } from './components/viewloan/viewloan.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -44,7 +44,7 @@ import { FormsModule } from '@angular/forms';
 
     UsernavComponent,
     UserviewfeedbackComponent,
-    UserviewloanComponent,
+    UserViewLoanComponent,
     ViewloanComponent
   ],
   imports: [
