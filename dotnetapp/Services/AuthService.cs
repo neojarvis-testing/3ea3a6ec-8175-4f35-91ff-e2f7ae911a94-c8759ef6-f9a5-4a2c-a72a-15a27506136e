@@ -102,7 +102,7 @@ namespace dotnetapp.Services
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var token = new JwtSecurityToken(
                 issuer: _configuration["JWT:Issuer"],
-                audience: _configuration["JWT:Audience"],
+                audience: _configuration["JWT:Issuer"],
                 claims: claims,
                 expires: DateTime.UtcNow.AddMinutes(30),
                 signingCredentials: creds
