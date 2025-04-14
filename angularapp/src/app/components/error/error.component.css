@@ -1,0 +1,12 @@
+.error-container {
+    margin: 20px;
+    text-align: center;
+  }
+  
+  .alert {
+    display: inline-block;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 1.2em;
+  }
+  
