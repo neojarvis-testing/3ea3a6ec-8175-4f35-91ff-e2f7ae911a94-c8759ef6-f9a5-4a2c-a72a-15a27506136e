@@ -16,13 +16,11 @@ namespace dotnetapp.Services
             _context = context;
         }
  
-        // Retrieves all feedbacks from the database.
         public async Task<IEnumerable<Feedback>> GetAllFeedbacks()
         {
             return await _context.Feedbacks.Include(f => f.User).ToListAsync();
         }
  
-        // Retrieves all feedbacks for a specific user.
         public async Task<IEnumerable<Feedback>> GetFeedbacksByUserId(int userId)
         {
             return await _context.Feedbacks
@@ -30,8 +28,7 @@ namespace dotnetapp.Services
                 .Include(f => f.User)
                 .ToListAsync();
         }
- 
-        // Adds new feedback to the database.
+
         public async Task<bool> AddFeedback(Feedback feedback)
         {
             _context.Feedbacks.Add(feedback);
@@ -39,7 +36,6 @@ namespace dotnetapp.Services
             return true;
         }
  
-        // Deletes a feedback by ID.
         public async Task<bool> DeleteFeedback(int feedbackId)
         {
             var feedback = await _context.Feedbacks.FindAsync(feedbackId);

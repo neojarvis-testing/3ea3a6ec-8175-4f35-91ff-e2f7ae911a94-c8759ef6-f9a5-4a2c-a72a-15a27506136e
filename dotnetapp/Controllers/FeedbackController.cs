@@ -23,8 +23,6 @@ namespace dotnetapp.Controllers
             _feedbackService = feedbackService;
         }
  
-        // GetAllFeedbacks
-        // Retrieves all feedbacks.
         
         [HttpGet]
         [Authorize(Roles= "Admin")]
@@ -45,8 +43,7 @@ namespace dotnetapp.Controllers
             }
         }
  
-        //GetFeedbacksByUserId
-        //Retrieves feedbacks by a specific user id.
+     
         [HttpGet("user/{userId}")]
         [Authorize(Roles= "User")]
         public async Task<ActionResult<IEnumerable<Feedback>>> GetFeedbacksByUserId(int userId)
@@ -69,8 +66,7 @@ namespace dotnetapp.Controllers
                 return StatusCode(500, new {ex.Message});
             }
         }
-        //AddFeedback
-        // Adds a new feedback.
+       
         
         [HttpPost]
         [Authorize(Roles= "User")]
@@ -95,8 +91,7 @@ namespace dotnetapp.Controllers
             }
         }
  
-        //
-        // Deletes a feedback by id.
+        
         [HttpDelete("{feedbackId}")]
         [Authorize(Roles= "User")]
         public async Task<ActionResult> DeleteFeedback(int feedbackId)
@@ -107,7 +102,7 @@ namespace dotnetapp.Controllers
                 {
                     return BadRequest(new {error = "Invalid feedback id"});
                 }
-                // Assume the DeleteFeedback method returns a boolean indicating if the deletion was successful.
+             
                 bool isDeleted = await _feedbackService.DeleteFeedback(feedbackId);
                 if (isDeleted)
                 {
