@@ -9,7 +9,7 @@ using dotnetapp.Data;
 using Microsoft.AspNetCore.Authorization;
 
 namespace dotnetapp.Controllers{
-    [Authorize]
+
     [ApiController]
     [Route("api/[controller]")]
     public class LoanController : ControllerBase

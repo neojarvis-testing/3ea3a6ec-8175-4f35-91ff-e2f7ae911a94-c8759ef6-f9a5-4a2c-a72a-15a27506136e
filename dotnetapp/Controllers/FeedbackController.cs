@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace dotnetapp.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("api/feedback")]
     public class FeedbackController : ControllerBase
@@ -124,5 +123,6 @@ namespace dotnetapp.Controllers
                 return StatusCode(500, new {error = ex.Message});
             }
         }
-    }}
+    }
+}
 
