@@ -11,7 +11,6 @@ import { AdminviewfeedbackComponent } from './components/adminviewfeedback/admin
 import { CreateloanComponent } from './components/createloan/createloan.component';
 import { ErrorComponent } from './components/error/error.component';
 import { HomeComponent } from './components/home/home.component';
-import { LoanformComponent } from './components/loanform/loanform.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegistrationComponent } from './components/registration/registration.component';
@@ -22,6 +21,7 @@ import { UsernavComponent } from './components/usernav/usernav.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 import { UserviewloanComponent } from './components/userviewloan/userviewloan.component';
 import { ViewloanComponent } from './components/viewloan/viewloan.component';
+import { LoanformComponent } from './loanform/loanform.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,6 @@ import { ViewloanComponent } from './components/viewloan/viewloan.component';
     CreateloanComponent,
     ErrorComponent,
     HomeComponent,
-    LoanformComponent,
     LoginComponent,
     NavbarComponent,
     RegistrationComponent,
@@ -43,6 +42,7 @@ import { ViewloanComponent } from './components/viewloan/viewloan.component';
     UserviewfeedbackComponent,
     UserviewloanComponent,
     ViewloanComponent,
+    LoanformComponent
   ],
   imports: [
     BrowserModule,
