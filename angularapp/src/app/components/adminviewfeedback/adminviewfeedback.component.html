@@ -1,1 +1,38 @@
-<p>adminviewfeedback works!</p>
+<div class="feedback-container">
+    <h2>Feedback Details</h2>
+    <input type="text" placeholder="Search feedbacks..." [(ngModel)]="searchTerm" (input)="filterFeedbacks()">
+    <table>
+    <thead>
+    <tr>
+    <th>S.No</th>
+    <th>User Name</th>
+    <th>Feedback</th>
+    <th>Posted Date</th>
+    <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let feedback of filteredFeedbacks; let i = index">
+    <td>{{ i + 1 }}</td>
+    <td>{{ feedback.userName }}</td>
+    <td>{{ feedback.feedback }}</td>
+    <td>{{ feedback.postedDate }}</td>
+    <td><button (click)="showProfile(feedback)">Show Profile</button></td>
+    </tr>
+    </tbody>
+    </table>
+    <div *ngIf="filteredFeedbacks.length === 0">No data found</div>
+    </div>
+     
+    <!-- Profile Modal -->
+    <div *ngIf="selectedFeedback" class="modal">
+    <div class="modal-content">
+    <h2>User Details</h2>
+    <p>Email: {{ selectedFeedback.email }}</p>
+    <p>Username: {{ selectedFeedback.userName }}</p>
+    <p>Mobile Number: {{ selectedFeedback.mobileNumber }}</p>
+    <button (click)="closeModal()">Close</button>
+    </div>
+    </div>
+    
+     

@@ -1,1 +1,41 @@
-<p>userappliedloan works!</p>
+<div class="container">
+  <h2>Applied Loans</h2>
+ 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search..." class="form-control mb-2"/>
+ 
+  <div *ngIf="filteredLoans.length === 0">
+    <p>Oops! No records Found</p>
+  </div>
+ 
+  <table *ngIf="filteredLoans.length > 0" class="table table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>S.No</th>
+        <th>Loan Name</th>
+        <th>Submission Date</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let loan of filteredLoans; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ loan.name }}</td>
+        <td>{{ loan.date }}</td>
+        <td>{{ loan.status }}</td>
+        <td>
+          <button class="btn btn-danger" (click)="confirmDelete(loan.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+ 
+  <!-- Confirmation Popup -->
+  <div *ngIf="showConfirmPopup" class="popup-backdrop">
+    <div class="popup">
+      <p>Are you sure you want to delete?</p>
+      <button class="btn btn-danger mr-2" (click)="deleteLoan()">Yes, Delete</button>
+      <button class="btn btn-secondary" (click)="cancelDelete()">Cancel</button>
+    </div>
+  </div>
+</div>
