@@ -1,25 +1,24 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { UserViewloanComponent } from './userviewloan.component';
-import { UserViewLoanComponent } from './userviewloan.component';
+import { UserviewloanComponent } from './userviewloan.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('UserviewloanComponent', () => {
-  let component: UserViewLoanComponent;
-  let fixture: ComponentFixture<UserViewLoanComponent>;
+  let component: UserviewloanComponent;
+  let fixture: ComponentFixture<UserviewloanComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, RouterTestingModule, HttpClientTestingModule, FormsModule],
-      declarations: [ UserViewLoanComponent ]
+      declarations: [ UserviewloanComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserViewLoanComponent);
+    fixture = TestBed.createComponent(UserviewloanComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
