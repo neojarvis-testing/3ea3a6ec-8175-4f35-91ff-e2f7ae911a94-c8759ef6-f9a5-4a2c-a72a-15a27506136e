@@ -1,1 +1,36 @@
-<p>viewloan works!</p>
+<h2>Loan Details</h2>
+ 
+<input type="text" [(ngModel)]="searchTerm" (input)="search()" placeholder="Search..." class="form-control mb-3">
+ 
+<table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th>S.No</th>
+      <th>Loan Type</th>
+      <th>Maximum Amount</th>
+      <th>Interest Rate</th>
+      <th>Repayment Tenure</th>
+      <th>Eligibility Criteria</th>
+      <th>Documents Required</th>
+      <th>Description</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let loan of filteredLoans; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ loan.loanType }}</td>
+      <td>{{ loan.maxAmount | currency:'INR' }}</td>
+      <td>{{ loan.interestRate }}%</td>
+      <td>{{ loan.repaymentTenure }} months</td>
+      <td>{{ loan.eligibility }}</td>
+      <td>{{ loan.documentsRequired }}</td>
+      <td>{{ loan.description }}</td>
+      <td>
+        <button class="btn btn-success btn-sm" (click)="editLoan(loan.id)">Edit</button>
+        <button class="btn btn-success btn-sm" (click)="deleteLoan(loan.id)">Delete</button>
+ 
+      </td>
+    </tr>
+  </tbody>
+</table>
