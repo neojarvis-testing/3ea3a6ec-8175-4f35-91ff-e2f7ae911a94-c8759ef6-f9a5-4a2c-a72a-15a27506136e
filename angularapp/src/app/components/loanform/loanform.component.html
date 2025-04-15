@@ -1,0 +1,59 @@
+<div class="loan-form">
+    <h2>Loan Application Form</h2>
+   
+    <form [formGroup]="loanForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label>Farm Location*</label>
+        <input formControlName="farmLocation" type="text" />
+        <div *ngIf="submitted && loanForm.controls.farmLocation.errors">
+          Farm Location is required
+        </div>
+      </div>
+   
+      <div>
+        <label>Farmer's Address*</label>
+        <input formControlName="farmerAddress" type="text" />
+        <div *ngIf="submitted && loanForm.controls.farmerAddress.errors">
+          Farmer's Address is required
+        </div>
+      </div>
+   
+      <div>
+        <label>Farm Size (in acres)*</label>
+        <input formControlName="farmSize" type="number" />
+        <div *ngIf="submitted && loanForm.controls.farmSize.errors">
+          Farm Size is required
+        </div>
+      </div>
+   
+      <div>
+        <label>Farm Purpose*</label>
+        <input formControlName="farmPurpose" type="text" />
+        <div *ngIf="submitted && loanForm.controls.farmPurpose.errors">
+          Farm Purpose is required
+        </div>
+      </div>
+   
+      <div>
+        <label>Proof*</label>
+        <input type="file" (change)="onFileChange($event)" />
+        <div *ngIf="submitted && !proofFile">
+          Proof is required
+        </div>
+      </div>
+   
+      <div *ngIf="submitted && loanForm.invalid && !proofFile" style="color:red;">
+        All fields are required
+      </div>
+   
+      <button type="submit">Submit</button>
+      <button type="button" (click)="goBack()">Back</button>
+    </form>
+   
+    <div *ngIf="showSuccessPopup" class="popup">
+      <p>Successfully Submitted!</p>
+      <button (click)="redirectToUserView()">Ok</button>
+    </div>
+  </div>
+
+   
