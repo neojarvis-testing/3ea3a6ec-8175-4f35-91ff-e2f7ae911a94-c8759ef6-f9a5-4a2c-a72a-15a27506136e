@@ -1,1 +1,32 @@
-<p>createloan works!</p>
+<h2>Create New Loan</h2>
+<form #loanForm="ngForm" (ngSubmit)="addLoan(loanForm)">
+  <label for="loanType">Loan Type*</label>
+  <input id="loanType" type="text" [(ngModel)]="newLoan.LoanType" name="LoanType" required />
+ 
+  <label for="description">Description*</label>
+  <input id="description" type="text" [(ngModel)]="newLoan.Description" name="Description" required />
+ 
+  <label for="interestRate">Interest Rate*</label>
+  <input id="interestRate" type="number" [(ngModel)]="newLoan.InterestRate" name="InterestRate" required />
+ 
+  <label for="maximumAmount">Maximum Amount*</label>
+  <input id="maximumAmount" type="number" [(ngModel)]="newLoan.MaximumAmount" name="MaximumAmount" required />
+ 
+  <label for="repaymentTenure">Repayment Tenure*</label>
+  <input id="repaymentTenure" type="number" [(ngModel)]="newLoan.RepaymentTenure" name="RepaymentTenure" required />
+ 
+  <label for="eligibility">Eligibility*</label>
+  <textarea id="eligibility" [(ngModel)]="newLoan.Eligibility" name="Eligibility" required></textarea>
+ 
+  <label for="documentsRequired">Documents Required?*</label>
+  <select id="documentsRequired" [(ngModel)]="newLoan.DocumentsRequired" name="DocumentsRequired" required>
+    <option>Yes</option>
+    <option>No</option>
+  </select>
+ 
+  <button type="submit">Create Loan</button>
+</form>
+ 
+ 
+ 
+ 

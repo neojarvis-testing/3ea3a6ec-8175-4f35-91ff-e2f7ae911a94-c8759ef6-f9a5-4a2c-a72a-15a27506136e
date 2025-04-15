@@ -1,1 +1,85 @@
-<p>registration works!</p>
+<div class="container">
+    <h2>Registration</h2>
+    <form #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm)">
+        <!-- Username -->
+        <div class="form-group">
+            <label for="username">Username*</label>
+            <input id="username" type="text" name="username" class="form-control" [(ngModel)]="user.Username"
+                #username="ngModel" required />
+            <div *ngIf="submitted && username.invalid" class="error">
+
+                Username is required.
+            </div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            <label for="email">Email*</label>
+            <input id="email" type="email" name="email" class="form-control" [(ngModel)]="user.Email" #email="ngModel"
+                required email />
+            <div *ngIf="submitted && email.errors?.required" class="error">
+
+                Email is required.
+            </div>
+            <div *ngIf="submitted && email.errors?.email" class="error">
+
+                Enter a valid email.
+            </div>
+            <div *ngIf="emailAlreadyExists" class="error">
+
+                User already exists.
+            </div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+            <label for="password">Password*</label>
+            <input id="password" type="password" name="password" class="form-control" [(ngModel)]="user.Password"
+                #password="ngModel" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$" />
+            <div *ngIf="submitted && password.invalid" class="error">
+
+                Password must include at least one uppercase letter, one lowercase letter, one digit, and be 8+
+                characters long.
+            </div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password*</label>
+            <input id="confirmPassword" type="password" name="confirmPassword" class="form-control"
+                [(ngModel)]="confirmPassword" #confirmPasswordField="ngModel" required />
+            <div *ngIf="submitted && !passwordsMatch()" class="error">
+
+                Passwords do not match.
+            </div>
+        </div>
+
+        <!-- Mobile -->
+        <div class="form-group">
+            <label for="mobile">Mobile Number*</label>
+            <input id="mobile" type="text" name="mobile" class="form-control" [(ngModel)]="user.MobileNumber"
+                #mobile="ngModel" required pattern="^\d{10}$" />
+            <div *ngIf="submitted && mobile.invalid" class="error">
+
+                Mobile number must be 10 digits.
+            </div>
+        </div>
+
+        <!-- Role -->
+        <div class="form-group">
+            <label for="role">Role*</label>
+            <select id="role" name="role" class="form-control" [(ngModel)]="user.UserRole" #role="ngModel" required>
+                <option value="">Select a role</option>
+                <option value="Admin">Admin</option>
+                <option value="User">User</option>
+            </select>
+            <div *ngIf="submitted && role.invalid" class="error">
+                Please select a role.
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="registrationForm.invalid || !passwordsMatch()">
+            Register
+        </button>
+    </form>
+</div>
