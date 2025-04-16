@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdmineditloanComponent } from './components/admineditloan/admineditloan.component';
 import { AdminnavComponent } from './components/adminnav/adminnav.component';
 import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
@@ -22,6 +22,8 @@ import { UsernavComponent } from './components/usernav/usernav.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 import { UserviewloanComponent } from './components/userviewloan/userviewloan.component';
 import { ViewloanComponent } from './components/viewloan/viewloan.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { LandingComponent } from './components/landing/landing.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,12 +44,15 @@ import { ViewloanComponent } from './components/viewloan/viewloan.component';
     UserviewfeedbackComponent,
     UserviewloanComponent,
     ViewloanComponent,
+    FooterComponent,
+    LandingComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

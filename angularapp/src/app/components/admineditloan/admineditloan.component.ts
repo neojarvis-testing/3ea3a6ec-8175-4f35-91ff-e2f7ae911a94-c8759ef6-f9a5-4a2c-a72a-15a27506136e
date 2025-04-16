@@ -21,36 +21,30 @@ export class AdmineditloanComponent implements OnInit {
   editId: number;
   errorMessage: string = '';
   showModal: boolean = false;
- 
-  constructor(private loanService: LoanService, private router: Router, private activatedRoute: ActivatedRoute) {}
- 
+  constructor(private lService: LoanService, private route: Router, private Aroute: ActivatedRoute) { }
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
-      this.editId = params.id; 
-      this.loanService.getLoanById(this.editId).subscribe(res => {
-        this.editLoan = res; 
-      });
+    this.Aroute.params.subscribe(p => {
+      this.editId = p.id;
+      this.lService.getLoanById(this.editId).subscribe(res => { this.editLoan = res; });
     });
   }
- 
   updateLoan(): void {
     if (this.editLoan.LoanType && this.editLoan.Description && this.editLoan.InterestRate && this.editLoan.MaximumAmount && this.editLoan.RepaymentTenure && this.editLoan.Eligibility && this.editLoan.DocumentsRequired) {
-      this.loanService.updateLoan(this.editId, this.editLoan).subscribe(() => {
-        this.router.navigate(['/adminviewloan']); 
+      this.lService.updateLoan(this.editId, this.editLoan).subscribe(() => {
+        this.route.navigate(['/viewloan']);
       }, (error) => {
         if (error.status === 500) {
-          this.errorMessage = "Loan with the same type already exists"; 
-          this.showModal = true; 
+          this.errorMessage = "Loan with the same name already exists";
+          this.showModal = true;
         }
       });
     }
   }
- 
-  cancelUpdate(): void {
-    this.router.navigate(['/adminviewloan']); 
+  cancelUpdate() {
+    this.route.navigate(['viewloan']);
   }
- 
-  closeModal(): void {
-    this.showModal = false; 
+  closeModal() {
+    this.showModal = false;
   }
 }
+

@@ -1,3 +1,5 @@
+import { Loan } from "./loan.model";
+import { User } from "./user.model";
 export interface LoanApplication
 {
     LoanApplicationId? : number;
@@ -10,4 +12,6 @@ export interface LoanApplication
     FarmSizeInAcres: number;
     FarmPurpose: string;
     File : string;
+    Loan?:Loan;
+    User?:User
 }

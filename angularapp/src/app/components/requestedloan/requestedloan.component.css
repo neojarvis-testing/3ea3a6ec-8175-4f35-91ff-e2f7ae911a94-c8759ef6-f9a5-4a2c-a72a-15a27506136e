@@ -1,0 +1,182 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #f7f8fc;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.request-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+.request-container h2 {
+    font-size: 2rem;
+    color: #2c3e50;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 1rem;
+}
+.underline {
+    width: 100px;
+    height: 3px;
+    background-color: #3498db;
+    margin: 10px auto;
+    border-radius: 2px;
+}
+
+.search-filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.search-filter input[type="text"],
+.search-filter select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+}
+.search-filter input[type="text"] {
+    flex: 1;
+    margin-right: 10px;
+}
+.search-filter select {
+    flex: 0.3;
+}
+.search-filter input[type="text"]:focus,
+.search-filter select:focus {
+    border-color: #1abc9c;
+    outline: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+table thead tr {
+    background-color: #3498db;
+}
+table th, table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+table th {
+    color: white;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+}
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.no-records {
+    text-align: center;
+    font-weight: bold;
+    padding: 20px;
+    color: #7f8c8d;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+button {
+    padding: 10px 15px;
+    width: 120px; 
+    height: 40px; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+button.btn-success {
+    background-color: #28a745; 
+    color: white;
+}
+button.btn-danger {
+    background-color: #dc3545; 
+    color: white;
+}
+button.btn-info {
+    background-color: #17a2b8; 
+    color: white;
+}
+button:hover {
+    opacity: 0.85; 
+}
+button:disabled {
+    background-color: #ccc; 
+    cursor: not-allowed;
+}
+
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+.pagination-controls button {
+    padding: 5px 10px; 
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+.pagination-controls button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+.pagination-controls span {
+    margin: 0 10px;
+}
+.modal {
+    display: block;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 500px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+}
+.modal-content {
+    padding: 20px;
+    text-align: center;
+}
+.modal-content h3 {
+    margin-top: 0;
+    color: #2c3e50;
+    font-family: 'Poppins', sans-serif;
+}
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.close-btn:hover, .close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+} */

@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Edu+AU+VIC+WA+NT+Arrows:wght@400;700&display=swap');
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: black; /* Semi-transparent white background */
+  backdrop-filter: blur(10px); /* Blur effect */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  padding: 1rem 2rem; /* Adjusted padding for better spacing */
+  color: whitesmoke;
+  border-radius: 10px; /* Slight rounding for a softer look */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  transition: background 0.3s ease; /* Smooth transition for background */
+  height: 45px;
+}
+.navbar:hover {
+  /* background: rgba(255, 255, 255, 0.2); Slightly more opaque on hover */
+}
+.logo {
+  width: 70px; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 100%; /* Ensure it doesn't exceed the navbar height */
+  object-fit: contain; /* Ensure the image fits within the specified dimensions */
+  margin-right: 10px; /* Space between the logo and the brand name */
+}
+.brand-logo {
+  font-family: 'Edu AU VIC WA NT Arrows', cursive;
+  color: white;
+  margin-left: 10px;
+  font-size: 1.5rem;
+}
+.navbar-header {
+  display: flex;
+  align-items: center;
+}
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.navigation {
+  display: flex; /* Aligns Register and Login in a line */
+  align-items: center; /* Vertically center the links */
+}
+.nav-link {
+  color: white;
+  text-decoration: none;
+  margin: 0 1rem; /* Adjusted margin to align links properly */
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.2rem;
+  transition: color 0.3s ease; /* Smooth transition for color */
+}
+.nav-link:hover {
+  text-decoration: underline;
+  color: #ffcc00; /* Change color on hover */
+}

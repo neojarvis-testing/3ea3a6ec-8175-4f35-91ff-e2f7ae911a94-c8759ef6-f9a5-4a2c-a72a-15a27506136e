@@ -1,6 +1,15 @@
-<div class="container text-center mt-5">
-    <h1 class="display-4">Farm Financer</h1>
-    <p class="lead mt-4">
+<div> 
+    <ng-container *ngIf="userRole === 'Admin'; else userNav">
+      <app-adminnav></app-adminnav>
+    </ng-container>
+    <ng-template #userNav>
+      <app-usernav></app-usernav>
+    </ng-template>
+  
+<div class="admin-image">
+    <div class="contenthome">
+      <h1>Farm Financer</h1>
+      <p>
         Farm Financer is a digital platform designed to support farmers and agricultural businesses in securing reliable
         and flexible financial assistance.
         The platform offers a comprehensive selection of loan options tailored to various agricultural needs, such as
@@ -9,5 +18,7 @@
         empowering users to make informed decisions.
         Farm Financer ensures that farmers can access the financial support they need with ease, providing a seamless
         and user-friendly application process to help grow their agricultural ventures.
-    </p>
-</div>
+      </p>
+    </div>
+  </div> 
+  </div>

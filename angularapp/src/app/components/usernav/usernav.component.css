@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Edu+AU+VIC+WA+NT+Arrows:wght@400;700&display=swap');
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: black; /* Semi-transparent white background */
+  backdrop-filter: blur(10px); /* Blur effect */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  padding: 1rem 2rem; /* Adjusted padding for better spacing */
+  color: whitesmoke;
+  border-radius: 10px; /* Slight rounding for a softer look */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  transition: background 0.3s ease; /* Smooth transition for background */
+  height: 45px;
+}
+.navbar:hover {
+  /* background: rgba(255, 255, 255, 0.2); Slightly more opaque on hover */
+}
+.logo {
+  width: 70px; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 100%; /* Ensure it doesn't exceed the navbar height */
+  object-fit: contain; /* Ensure the image fits within the specified dimensions */
+  margin-right: 10px; /* Space between the logo and the brand name */
+}
+.brand-logo {
+  font-family: 'Edu AU VIC WA NT Arrows', cursive;
+  color: white;
+  margin-left: 10px;
+  font-size: 1.5rem;
+}
+.navbar-header {
+  display: flex;
+  align-items: center;
+}
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.navbar-links-container {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  justify-content: flex-end; /* Shift all options to the right */
+}
+.navbar-links {
+  display: flex; /* Aligns links in a line */
+  align-items: center; /* Vertically center the links */
+  list-style: none; /* Remove default list styling */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+}
+.navbar-links li {
+  margin: 0 1rem; /* Adjusted margin to align links properly */
+}
+.navbar-links a {
+  color: white;
+  text-decoration: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.2rem;
+  transition: color 0.3s ease; /* Smooth transition for color */
+}
+.navbar-links a:hover {
+  text-decoration: underline;
+  color: rgba(253, 253, 251, 0.8); /* Change color on hover */
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropbtn {
+  background: none;
+  border: none;
+  color: white;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: black;
+  min-width: 160px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  transition: background 0.3s ease;
+}
+.dropdown-content a:hover {
+  background-color: #ffcc00;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.navbar-user-info {
+  display: flex;
+  align-items: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.2rem;
+  color: white;
+}
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+.modal-content button {
+  margin: 0 10px; /* Add margin to create space between buttons */
+  width: 120px; /* Set a fixed width for both buttons */
+  padding: 10px; /* Ensure padding is consistent */
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.2rem;
+}
+/* Add these styles for the logout button */
+.logout-button {
+  background-color: white;
+  color: red;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.logout-button:hover {
+  background-color: #f0f0f0;
+  color: darkred;
+}
+/* Add these styles for the "Yes, Logout" button */
+.yes-logout-button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.yes-logout-button:hover {
+  background-color: darkred;
+}
+/* Add these styles for the demoUser/User label */
+.demo-user-label {
+  color: whitesmoke;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.2rem;
+  margin-right: 1rem; /* Space between the label and the Home link */
+  display: flex;
+  align-items: center;
+}
