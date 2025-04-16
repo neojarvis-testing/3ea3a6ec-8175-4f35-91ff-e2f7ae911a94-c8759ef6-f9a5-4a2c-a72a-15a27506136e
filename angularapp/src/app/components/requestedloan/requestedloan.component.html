@@ -1,55 +1,53 @@
 <div class="container">
-<h2>Loan Requests for Approval</h2>
-<input type="text" [(ngModel)]="searchLoanType" (input)="applyFilters()" placeholder="Search by Loan Type" />
-<select [(ngModel)]="selectedStatus" (change)="applyFilters()">
-<option value="All">All</option>
-<option value="Pending">Pending</option>
-<option value="Approved">Approved</option>
-<option value="Rejected">Rejected</option>
-</select>
-<table>
-<thead>
-<tr>
-<th>S.No</th>
-<th>Username</th>
-<th>Loan Type</th>
-<th>Farm Location</th>
-<th>Submission Date</th>
-<th>Farm Size (Acres)</th>
-<th>Status</th>
-<th>Action</th>
-</tr>
-</thead>
-<tbody *ngIf="filteredRequests.length > 0; else noData">
-<tr *ngFor="let request of filteredRequests; index as i">
-<td>{{ i + 1 }}</td>
-<td>{{ request.username }}</td>
-<td>{{ request.loanType }}</td>
-<td>{{ request.farmLocation }}</td>
-<td>{{ request.submissionDate }}</td>
-<td>{{ request.farmSize }}</td>
-<td>{{ request.status }}</td>
-<td>
-<button (click)="showMore(request)">Show More</button>
-<button *ngIf="request.status === 'Pending'" (click)="approveRequest(request)">Approve</button>
-<button *ngIf="request.status === 'Pending'" (click)="rejectRequest(request)">Reject</button>
-</td>
-</tr>
-</tbody>
-</table>
-<ng-template #noData>
-<p>Oops! No records found</p>
-</ng-template>
-<div class="modal" *ngIf="selectedRequest">
-<div class="modal-content">
-<span class="close" (click)="closeModal()">×</span>
-<h3>Farmer's Address: {{ selectedRequest.address }}</h3>
-<p>Farm Purpose: Demo</p>
-<h4>Proof</h4>
-<img [src]="selectedRequest.proofUrl" alt="Proof" />
-</div>
-</div>
-</div>
-
- 
- 
+    <h2>Loan Requests for Approval</h2>
+    <input type="text" [(ngModel)]="searchLoanType" (input)="applyFilters()" placeholder="Search by Loan Type" />
+    <select [(ngModel)]="selectedStatus" (change)="applyFilters()">
+    <option value="All">All</option>
+    <option value="Pending">Pending</option>
+    <option value="Approved">Approved</option>
+    <option value="Rejected">Rejected</option>
+    </select>
+    <table>
+    <thead>
+    <tr>
+    <th>S.No</th>
+    <th>Username</th>
+    <th>Loan Type</th>
+    <th>Farm Location</th>
+    <th>Submission Date</th>
+    <th>Farm Size (Acres)</th>
+    <th>Status</th>
+    <th>Action</th>
+    </tr>
+    </thead>
+    <tbody *ngIf="filteredRequests.length > 0; else noData">
+    <tr *ngFor="let request of filteredRequests; index as i">
+    <td>{{ i + 1 }}</td>
+    <td>{{ request.username }}</td>
+    <td>{{ request.loanType }}</td>
+    <td>{{ request.farmLocation }}</td>
+    <td>{{ request.submissionDate }}</td>
+    <td>{{ request.farmSize }}</td>
+    <td>{{ request.status }}</td>
+    <td>
+    <button (click)="showMore(request)">Show More</button>
+    <button *ngIf="request.status === 'Pending'" (click)="approveRequest(request)">Approve</button>
+    <button *ngIf="request.status === 'Pending'" (click)="rejectRequest(request)">Reject</button>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    <ng-template #noData>
+    <p>Oops! No records found</p>
+    </ng-template>
+    <div class="modal" *ngIf="selectedRequest">
+    <div class="modal-content">
+    <span class="close" (click)="closeModal()">×</span>
+    <h3>Farmer's Address: {{ selectedRequest.address }}</h3>
+    <p>Farm Purpose: Demo</p>
+    <h4>Proof</h4>
+    <img [src]="selectedRequest.proofUrl" alt="Proof" />
+    </div>
+    </div>
+    </div>
+    
