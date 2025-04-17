@@ -17,7 +17,7 @@ export class RegistrationComponent implements OnInit {
   userRole: string = '';
   passwordFieldType: string = 'password'; 
   confirmPasswordFieldType: string = 'password';
-  adminCode: string = 'AD2025';
+  adminCode: string = 'ZINC2025';
   constructor(private authService: AuthService, private router: Router) { }
   ngOnInit(): void { }
   onRegister() {

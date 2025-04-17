@@ -21,16 +21,17 @@ export class UserappliedloanComponent implements OnInit {
   }
 
   loanApplicationList : LoanApplication[] = [];
-
+  filteredLoans: LoanApplication[] = [];
+  paginatedLoans: LoanApplication[] = [];
   showDeleteModal:boolean = false;
   localDelteVar : number = 0;
   userId = +(localStorage.getItem('userId'));
   showViewModal : boolean = false;
-
-  
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
+  searchTerm: string = '';
 
   constructor(private loanApp : LoanService, private router : Router) { }
-
 
   ngOnInit(): void {
     this.fetchAlloanApplicationsOfUser();
@@ -39,15 +40,39 @@ export class UserappliedloanComponent implements OnInit {
   fetchAlloanApplicationsOfUser(){
     this.loanApp.getAppliedLoans(this.userId).subscribe(d=>{
       this.loanApplicationList = d;
-    },(error)=>{
-      this.router.navigate(['/error'])
-    })
+      this.filteredLoans = d;
+      this.updatePagination();
+    });
   }
-
-  openDeleteModal(id:number){
-    this.showDeleteModal = true;
-    this.localDelteVar = id;
-
+  searchLoans(): void {
+    if (this.searchTerm) {
+      this.filteredLoans = this.loanApplicationList.filter(c =>
+        c.Loan.LoanType.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    } else {
+      this.filteredLoans = [...this.loanApplicationList];
+    }
+    this.updatePagination();
+  }
+  updatePagination(): void {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.paginatedLoans = this.filteredLoans.slice(startIndex, endIndex);
+  }
+  nextPage(): void {
+    if ((this.currentPage * this.itemsPerPage) < this.filteredLoans.length) {
+      this.currentPage++;
+      this.updatePagination();
+    }
+  }
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePagination();
+    }
+  }
+  getTotalPages(): number {
+    return Math.ceil(this.filteredLoans.length / this.itemsPerPage);
   }
 
   viewLoan(id:number){
@@ -59,30 +84,29 @@ export class UserappliedloanComponent implements OnInit {
     )
   }
 
-  closeDeleteModal(){
-    this.showDeleteModal = false;
+
+  confirmDelete(loanId:number): void{
+    this.localDelteVar = loanId;
+    this.showDeleteModal = true;
   }
 
-  confirmDelete(){
-    this.loanApp.deleteLoanApplication(this.localDelteVar).subscribe(d=>{
-      this.fetchAlloanApplicationsOfUser();
-      this.showDeleteModal = false;
-    },(error)=>{
-      this.router.navigate(['/error'])
-    })
+  deleteLoan(): void{
+    if(this.localDelteVar !== null){
+      this.loanApp.deleteLoanApplication(this.localDelteVar).subscribe({
+        next: () => {
+          this.fetchAlloanApplicationsOfUser();
+          this.closeDeleteModal();
+        }
+      });
+    }
+  }
+  closeDeleteModal(): void{
+    this.showDeleteModal = false;
+    this.localDelteVar = null;
   }
 
   closeviewModal(){
     this.showViewModal = false;
-  }
-
-  filter(str: string){
-    this.loanApp.getAppliedLoans(this.userId).subscribe(d=>{
-      this.loanApplicationList = d;
-      this.loanApplicationList = this.loanApplicationList.filter(d=>JSON.stringify(d).toLowerCase().includes(str))
-    },(error)=>{
-      this.router.navigate(['/error'])
-    })
   }
 
   getStatus(loanStatus: number): string {
