@@ -1,40 +1,50 @@
-<div class="container mt-4">
-    <h2 class="mb-3">Available Loans</h2>
-    <div *ngIf="isLoading">Loading loans...</div>
-    <div *ngIf="!isLoading && loans.length === 0">Oops! No records found</div>
-    <table *ngIf="!isLoading && loans.length > 0" class="table table-bordered">
+<app-usernav></app-usernav>
+<div class="container">
+  <h2>Available Loans</h2>
+  <input 
+    type="text" 
+    placeholder="Search by Loan Type, Description, or Eligibiltity" 
+    [(ngModel)]="searchTerm" 
+    class="search-bar"
+    (input)="searchLoans()"
+  />
+  <table class="loans-table">
     <thead>
-    <tr>
-    <th>S.No</th>
-    <th>Loan Type</th>
-    <th>Loan Description</th>
-    <th>Interest Rate</th>
-    <th>Maximum Amount</th>
-    <th>Repayment Tenure (Months)</th>
-    <th>Eligibility</th>
-    <th>Documents Required</th>
-    <th>Action</th>
-    </tr>
+      <tr>
+        <th>S.No</th>
+        <th>Loan Type</th>
+        <th>Loan Description</th>
+        <th>Interest Rate</th>
+        <th>Maximum Amount</th>
+        <th>Repayment Tenure (Months)</th>
+        <th>Eligibility</th>
+        <th>Documents Required</th>
+        <th>Action</th>
+      </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let loan of loans; let i = index">
-    <td>{{ i + 1 }}</td>
-    <td>{{ loan.loanType }}</td>
-    <td>{{ loan.description }}</td>
-    <td>{{ loan.interestRate }}%</td>
-    <td>₹{{ loan.maxAmount }}</td>
-    <td>{{ loan.repaymentTenure }}</td>
-    <td>{{ loan.eligibility }}</td>
-    <td>{{ loan.documents }}</td>
-    <td>
-    <button class="btn"
-      [ngClass]="hasApplied(loan.id) ? 'btn-danger' : 'btn-primary'"
-      [disabled]="hasApplied(loan.id)"
-      (click)="applyForLoan(loan.id)">
-      {{ hasApplied(loan.id) ? 'Applied' : 'Apply' }}
-    </button>
-    </td>
-    </tr>
+      <tr *ngFor="let loan of filteredLoans; let i = index">
+        <td>{{ (currentPage - 1) * loansPerPage + i + 1 }}</td>
+        <td>{{ loan.LoanType }}</td>
+        <td>{{ loan.Description }}</td>
+        <td>{{ loan.InterestRate }}</td>
+        <td>{{ loan.MaximumAmount }}</td>
+        <td>{{ loan.RepaymentTenure }}</td>
+        <td>{{ loan.Eligibility }}</td>
+        <td>{{ loan.DocumentsRequired }}</td>
+        <td>
+          <button 
+            *ngIf="!isLoanApplied(loan.LoanId)" (click)="applyForLoan(loan.LoanId)" class="apply-btn">Apply
+          </button>
+          <span *ngIf="isLoanApplied(loan.LoanId)" class="applied-status">Applied</span>
+        </td>
+      </tr>
     </tbody>
-    </table>
-    </div>
+  </table>
+  <div class="pagination">
+    <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} of {{ getTotalPages() }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === getTotalPages()">Next</button>
+  </div>
+</div>
+

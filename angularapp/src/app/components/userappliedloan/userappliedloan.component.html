@@ -1,41 +1,79 @@
-<div class="container">
-    <h2>Applied Loans</h2>
-   
-    <input type="text" [(ngModel)]="searchTerm" placeholder="Search..." class="form-control mb-2"/>
-   
-    <div *ngIf="filteredLoans.length === 0">
-      <p>Oops! No records Found</p>
-    </div>
-   
-    <table *ngIf="filteredLoans.length > 0" class="table table-bordered">
-      <thead class="thead-dark">
+<app-usernav></app-usernav>
+<div class="container mt-4">
+  <div class="text-center">
+    <h2 class="mb-3">Applied Loans</h2>
+    <hr class="border-dark" style="height: 2px;">
+  </div>
+  <input type="text" class="form-control mb-3" #label (input)="filter(label.value)" placeholder="Search...">
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead class="table-success custom-green">
         <tr>
-          <th>S.No</th>
-          <th>Loan Name</th>
-          <th>Submission Date</th>
-          <th>Status</th>
-          <th>Action</th>
+          <th scope="col">S.No</th>
+          <th scope="col">Loan Name</th>
+          <th scope="col">Submission Date</th>
+          <th scope="col">Status</th>
+          <th scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let loan of filteredLoans; let i = index">
+        <tr *ngIf="loanApplicationList.length == 0">
+          <td colspan="5" class="text-center text-muted">Oops! No records Found</td>
+        </tr>
+        <tr *ngFor="let la of loanApplicationList; index as i">
           <td>{{ i + 1 }}</td>
-          <td>{{ loan.name }}</td>
-          <td>{{ loan.date }}</td>
-          <td>{{ loan.status }}</td>
+          <td>{{ la.Loan?.LoanType }}</td>
+          <td>{{ la.SubmissionDate }}</td>
+          <td>{{ getStatus(la.LoanStatus) }}</td>
           <td>
-            <button class="btn btn-danger" (click)="confirmDelete(loan.id)">Delete</button>
+            <button class="btn btn-primary btn-sm me-2 mb-2" (click)="viewLoan(la.LoanApplicationId)">View</button>
+            <button class="btn btn-danger btn-sm mb-2" (click)="openDeleteModal(la.LoanApplicationId)">Delete</button>
           </td>
         </tr>
       </tbody>
     </table>
-   
-    <!-- Confirmation Popup -->
-    <div *ngIf="showConfirmPopup" class="popup-backdrop">
-      <div class="popup">
-        <p>Are you sure you want to delete?</p>
-        <button class="btn btn-danger mr-2" (click)="deleteLoan()">Yes, Delete</button>
-        <button class="btn btn-secondary" (click)="cancelDelete()">Cancel</button>
+  </div>
+</div>
+
+<!-- Confirm Delete Modal -->
+<div *ngIf="showDeleteModal" class="modal fade show" style="display: block; background-color: rgba(0, 0, 0, 0.5);">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Delete</h5>
+        <button type="button" class="btn-close" (click)="closeDeleteModal()"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this loan?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeDeleteModal()">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="confirmDelete()">Delete</button>
       </div>
     </div>
   </div>
+</div>
+
+<!-- View Modal -->
+<div *ngIf="showViewModal" class="modal fade show" style="display: block; background-color: rgba(0, 0, 0, 0.5);">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Loan Details</h5>
+        <button type="button" class="btn-close" (click)="closeviewModal()"></button>
+      </div>
+      <div class="modal-body">
+        <p>Loan Name: {{loanApplication.Loan.LoanType}}</p>
+        <p>Submission Date: {{loanApplication.SubmissionDate}}</p>
+        <p>Status: {{getStatus(loanApplication.LoanStatus)}}</p>
+        <p>Farm Location: {{loanApplication.FarmLocation}}</p>
+        <p>Farmer Address: {{loanApplication.FarmerAddress}}</p>
+        <p>Farm Size: {{loanApplication.FarmSizeInAcres}}</p>
+        <p>Farm Purpose: {{loanApplication.FarmPurpose}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeviewModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

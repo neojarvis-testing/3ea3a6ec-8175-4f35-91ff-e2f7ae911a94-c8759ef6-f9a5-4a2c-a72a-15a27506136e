@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoanApplication } from 'src/app/models/loanapplication.model';
+import { LoanService } from 'src/app/services/loan.service';
 
 @Component({
   selector: 'app-userappliedloan',
@@ -7,41 +10,90 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserappliedloanComponent implements OnInit {
 
-  constructor() { }
+  loanApplication : LoanApplication ={
+    SubmissionDate: new Date().toISOString(),
+    LoanStatus: 0,
+    FarmLocation: '',
+    FarmerAddress: '',
+    FarmSizeInAcres: 0,
+    FarmPurpose: '',
+    File: ''
+  }
 
-  appliedLoans: any[] = [];
-  searchTerm: string = '';
-  selectedLoanId: number | null = null;
-  showConfirmPopup: boolean = false;
- 
+  loanApplicationList : LoanApplication[] = [];
+
+  showDeleteModal:boolean = false;
+  localDelteVar : number = 0;
+  userId = +(localStorage.getItem('userId'));
+  showViewModal : boolean = false;
+
+  
+
+  constructor(private loanApp : LoanService, private router : Router) { }
+
+
   ngOnInit(): void {
-    // Dummy data - replace with service call
-    this.appliedLoans = [
-      { id: 1, name: 'Demo Loan Type', date: '2024-10-23', status: 'Pending' }
-    ];
+    this.fetchAlloanApplicationsOfUser();
   }
- 
-  confirmDelete(id: number): void {
-    this.selectedLoanId = id;
-    this.showConfirmPopup = true;
+
+  fetchAlloanApplicationsOfUser(){
+    this.loanApp.getAppliedLoans(this.userId).subscribe(d=>{
+      this.loanApplicationList = d;
+    },(error)=>{
+      this.router.navigate(['/error'])
+    })
   }
- 
-  deleteLoan(): void {
-    if (this.selectedLoanId !== null) {
-      this.appliedLoans = this.appliedLoans.filter(loan => loan.id !== this.selectedLoanId);
-      this.showConfirmPopup = false;
-      this.selectedLoanId = null;
+
+  openDeleteModal(id:number){
+    this.showDeleteModal = true;
+    this.localDelteVar = id;
+
+  }
+
+  viewLoan(id:number){
+    this.showViewModal = true;
+    console.log(id);
+    this.loanApplication = this.loanApplicationList.find(l=>
+      l.LoanApplicationId == id
+      
+    )
+  }
+
+  closeDeleteModal(){
+    this.showDeleteModal = false;
+  }
+
+  confirmDelete(){
+    this.loanApp.deleteLoanApplication(this.localDelteVar).subscribe(d=>{
+      this.fetchAlloanApplicationsOfUser();
+      this.showDeleteModal = false;
+    },(error)=>{
+      this.router.navigate(['/error'])
+    })
+  }
+
+  closeviewModal(){
+    this.showViewModal = false;
+  }
+
+  filter(str: string){
+    this.loanApp.getAppliedLoans(this.userId).subscribe(d=>{
+      this.loanApplicationList = d;
+      this.loanApplicationList = this.loanApplicationList.filter(d=>JSON.stringify(d).toLowerCase().includes(str))
+    },(error)=>{
+      this.router.navigate(['/error'])
+    })
+  }
+
+  getStatus(loanStatus: number): string {
+    switch (loanStatus) {
+      case 0:
+        return 'Pending';
+      case 1:
+        return 'Approved';
+      case 2:
+        return 'Rejected';
     }
   }
- 
-  cancelDelete(): void {
-    this.showConfirmPopup = false;
-    this.selectedLoanId = null;
-  }
- 
-  get filteredLoans() {
-    return this.appliedLoans.filter(loan =>
-      loan.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
-  }
 }
+

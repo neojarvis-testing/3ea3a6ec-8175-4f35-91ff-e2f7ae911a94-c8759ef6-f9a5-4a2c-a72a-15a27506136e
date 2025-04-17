@@ -19,13 +19,13 @@ public class LoanApplicationService
 
     public async Task<IEnumerable<LoanApplication>> GetAllLoanApplications()
     {
-        return await _context.LoanApplications.ToListAsync();
+        return await _context.LoanApplications.Include(u=>u.Loan).Include(i=>i.User).ToListAsync();
     }
 
     public async Task<IEnumerable<LoanApplication>> GetLoanApplicationsByUserId(int userId)
     {
         return await _context.LoanApplications
-            .Where(la => la.UserId == userId)
+            .Where(la => la.UserId == userId).Include(u=>u.Loan)
             .ToListAsync();
     }
 

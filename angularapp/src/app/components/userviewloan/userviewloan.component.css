@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Edu+AU+VIC+WA+NT+Arrows:wght@400;700&display=swap');
+.container {
+  font-family: 'Barlow Condensed', sans-serif;
+  padding: 2rem;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+h2 {
+  font-family: 'Edu AU VIC WA NT Arrows', cursive;
+  color: #333;
+  margin-bottom: 1rem;
+}
+.search-bar {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+.loans-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+}
+.loans-table th, .loans-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+.loans-table th {
+  background: orange;
+  color: white;
+  font-weight: bold;
+}
+.loans-table tr:nth-child(even) {
+  background: #f2f2f2;
+}
+.loans-table tr:hover {
+  background: #e0e0e0;
+}
+.apply-btn {
+  background: orange;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.apply-btn:hover {
+  background: #ffcc00;
+}
+.applied-status {
+  color: green;
+  font-weight: bold;
+}
+.nav-btn {
+  background: orange;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 1rem;
+  transition: background 0.3s ease;
+}
+.nav-btn:hover {
+  background: #ffcc00;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+.pagination button {
+  background: orange;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin: 0 0.25rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.pagination button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+.pagination span {
+  margin: 0 0.5rem;
+  font-weight: bold;
+}
