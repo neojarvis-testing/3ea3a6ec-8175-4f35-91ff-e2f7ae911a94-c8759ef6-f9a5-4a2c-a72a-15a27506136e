@@ -1,53 +1,108 @@
+<app-adminnav></app-adminnav>
 <div class="container">
-    <h2>Loan Requests for Approval</h2>
-    <input type="text" [(ngModel)]="searchLoanType" (input)="applyFilters()" placeholder="Search by Loan Type" />
-    <select [(ngModel)]="selectedStatus" (change)="applyFilters()">
-    <option value="All">All</option>
-    <option value="Pending">Pending</option>
-    <option value="Approved">Approved</option>
-    <option value="Rejected">Rejected</option>
-    </select>
-    <table>
-    <thead>
-    <tr>
-    <th>S.No</th>
-    <th>Username</th>
-    <th>Loan Type</th>
-    <th>Farm Location</th>
-    <th>Submission Date</th>
-    <th>Farm Size (Acres)</th>
-    <th>Status</th>
-    <th>Action</th>
-    </tr>
-    </thead>
-    <tbody *ngIf="filteredRequests.length > 0; else noData">
-    <tr *ngFor="let request of filteredRequests; index as i">
-    <td>{{ i + 1 }}</td>
-    <td>{{ request.username }}</td>
-    <td>{{ request.loanType }}</td>
-    <td>{{ request.farmLocation }}</td>
-    <td>{{ request.submissionDate }}</td>
-    <td>{{ request.farmSize }}</td>
-    <td>{{ request.status }}</td>
-    <td>
-    <button (click)="showMore(request)">Show More</button>
-    <button *ngIf="request.status === 'Pending'" (click)="approveRequest(request)">Approve</button>
-    <button *ngIf="request.status === 'Pending'" (click)="rejectRequest(request)">Reject</button>
-    </td>
-    </tr>
-    </tbody>
-    </table>
-    <ng-template #noData>
-    <p>Oops! No records found</p>
-    </ng-template>
-    <div class="modal" *ngIf="selectedRequest">
-    <div class="modal-content">
-    <span class="close" (click)="closeModal()">×</span>
-    <h3>Farmer's Address: {{ selectedRequest.address }}</h3>
-    <p>Farm Purpose: Demo</p>
-    <h4>Proof</h4>
-    <img [src]="selectedRequest.proofUrl" alt="Proof" />
-    </div>
-    </div>
+  <h2 style="text-align: center;">Loan Requests for Approval</h2>
+  <table class="table table-striped">
+      <thead>
+          <tr>
+              <th>S.No</th>
+              <th>Username</th>
+              <th>Loan Type</th>
+              <th>Farm Location</th>
+              <th>Submission Date</th>
+              <th>Farm Size (Acres)</th>
+              <th>Status</th>
+              <th>Action</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let la of loanApplications, index as i">
+              <td>{{i+1}}</td>
+              <td>{{la.User?.Username}}</td>
+              <td>{{la.Loan?.LoanType}}</td>
+              <td>{{la.FarmLocation}}</td>
+              <td>{{la.SubmissionDate}}</td>
+              <td>{{la.FarmSizeInAcres}}</td>
+              <td><span *ngIf="la.LoanStatus==0">Pending</span>
+                  <span *ngIf="la.LoanStatus==1">Approved</span>
+                  <span *ngIf="la.LoanStatus==2">Rejected</span>
+              </td>
+              <td>
+                  <button class="btn btn-primary">Show More</button>
+                  <button class="btn btn-success" *ngIf="la.LoanStatus!=1" (click)="changeStatusToApproved(la.LoanApplicationId, la)">Approve</button>
+                  <button class="btn btn-danger" *ngIf="la.LoanStatus!=2" (click)="changeStatusToRejected(la.LoanApplicationId, la)">Reject</button>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+
+    <!-- <app-adminnav></app-adminnav>
+    <div class="request-container">
+      <h2>Loan Request for Approval</h2>
+      <div class="search-filter">
+        <input type="text" placeholder="Search by Loan Type..." [(ngModel)]="searchTerm" (input)="searchLoans()" />
+        <div class="status-filter">
+          <label for="status-filter">Filter by Status:</label>
+          <select id="status-filter" [(ngModel)]="statusFilter" (change)="onStatusChange($event.target.value)">
+            <option value="all">All</option>
+            <option value="Pending">Pending</option>
+            <option value="Approved">Approved</option>
+            <option value="Rejected">Rejected</option>
+          </select>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>S.No</th>
+            <th>Username</th>
+            <th>Loan Type</th>
+            <th>Farm Location</th>
+            <th>Submission Date</th>
+            <th>Farm Size(Acres)</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="paginatedRequests.length === 0">
+            <td colspan="8" class="no-records">No records found</td>
+          </tr>
+          <tr *ngFor="let request of paginatedRequests; let i = index">
+            <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+            <td>{{ request.User.Username }}</td>
+            <td>{{ request.Loan.LoanType }}</td>
+            <td>{{ request.FarmLocation }}</td>
+            <td>{{ request.SubmissionDate }}</td>
+            <td>{{ request.FarmSizeInAcres }}</td>
+            <td>{{ request.LoanStatus }}</td>
+            <td>
+              <div class="button-container">
+                <button (click)="approveRequest((currentPage - 1) * itemsPerPage + i, request)" [disabled]="request.Status !== 'Pending'" class="btn-success">Approve</button>
+                <button (click)="rejectRequest((currentPage - 1) * itemsPerPage + i, request)" [disabled]="request.Status !== 'Pending'" class="btn-danger">Reject</button>
+                <button (click)="showMore(request)" class="btn-info">Show More</button>
+              </div>
+            </td>
+          </tr>      
+        </tbody>
+      </table>
+      
+      
+      <div class="pagination-controls">
+        <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+        <span>Page {{ currentPage }} of {{ getTotalPages() }}</span>
+        <button (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= filteredRequests.length">Next</button>
+      </div>
     </div>
     
+    <div class="modal" *ngIf="selectedRequest">
+      <div class="modal-content">
+        <span class="close-btn" (click)="closeModal()">&times;</span>
+        <h3>Request Details</h3>
+        <p><strong>Farmer Address:</strong> {{ selectedRequest.FarmerAddress }}</p>
+        <p><strong>File:</strong> {{ selectedRequest.File }}</p>
+      
+      </div>
+    </div>
+    
+     -->

@@ -26,7 +26,6 @@ namespace dotnetapp.Models
         public DateTime SubmissionDate { get; set; }
 
         [Required(ErrorMessage = "Loan status is required.")]
-        [Range(1, int.MaxValue, ErrorMessage = "Loan status must be a valid integer.")]
         public int LoanStatus { get; set; }
 
         [Required(ErrorMessage = "Farm location is required.")]

@@ -17,26 +17,28 @@ import { AdminnavComponent } from './components/adminnav/adminnav.component';
 import { AdmineditloanComponent } from './components/admineditloan/admineditloan.component';
 import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
 import { ErrorComponent } from './components/error/error.component';
+import { LandingComponent } from './components/landing/landing.component';
+import { AuthGuard } from './components/authguard/auth.guard';
 
-
-const routes: Routes = [{ path: 'home', component: HomeComponent },
+const routes: Routes = [{path:'',component:LandingComponent},
+{ path: 'home', component: HomeComponent },
+{path:'landing',component:LandingComponent},
 { path: 'login', component: LoginComponent },
 { path: 'register', component: RegistrationComponent },
 { path: 'navbar', component: NavbarComponent },
-{ path: 'loanform', component: LoanformComponent},
-{ path: 'createloan', component: CreateloanComponent },
-{ path: 'viewloan', component: ViewloanComponent },
-{ path: 'requestedloan', component: RequestedloanComponent },
-{ path: 'usernav', component: UsernavComponent },
-{ path: 'userappliedloan', component: UserappliedloanComponent },
-{ path: 'userviewloan', component: UserviewloanComponent },
-{ path: 'useraddfeedback', component: UseraddfeedbackComponent },
-{ path: 'userviewfeedback', component: UserviewfeedbackComponent },
-{ path: 'adminnav', component: AdminnavComponent },
-{ path: 'admineditloan', component: AdmineditloanComponent },
-{ path: 'adminviewfeedback', component: AdminviewfeedbackComponent },
-{ path: '**', component: ErrorComponent },
-{path:'',redirectTo: 'home',pathMatch:'full'}];
+{ path: 'loanform', component: LoanformComponent,canActivate:[AuthGuard], data:{role : 'User'}},
+{ path: 'createloan', component: CreateloanComponent,canActivate:[AuthGuard], data:{role : 'Admin'} },
+{ path: 'viewloan', component: ViewloanComponent,canActivate:[AuthGuard], data:{role : 'Admin'} },
+{ path: 'requestedloan', component: RequestedloanComponent,canActivate:[AuthGuard], data:{role : 'Admin'} },
+{ path: 'usernav', component: UsernavComponent,canActivate:[AuthGuard], data:{role : 'User'} },
+{ path: 'userappliedloan', component: UserappliedloanComponent,canActivate:[AuthGuard], data:{role : 'User'} },
+{ path: 'userviewloan', component: UserviewloanComponent,canActivate:[AuthGuard], data:{role : 'User'} },
+{ path: 'useraddfeedback', component: UseraddfeedbackComponent,canActivate:[AuthGuard], data:{role : 'User'}},
+{ path: 'userviewfeedback', component: UserviewfeedbackComponent,canActivate:[AuthGuard], data:{role : 'User'} },
+{ path: 'adminnav', component: AdminnavComponent,canActivate:[AuthGuard], data:{role : 'Admin'} },
+{ path: 'admineditloan/:id', component: AdmineditloanComponent,canActivate:[AuthGuard], data:{role : 'Admin'}},
+{ path: 'adminviewfeedback', component: AdminviewfeedbackComponent,canActivate:[AuthGuard], data:{role : 'Admin'} },
+{ path: 'error', component: ErrorComponent }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

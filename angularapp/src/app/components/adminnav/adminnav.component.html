@@ -1,21 +1,21 @@
-<nav class="navbar">
+ <nav class="navbar">
     <div class="navbar-header">
       <span class="navbar-brand">
-        <img src="assets/images/FarmImg.jpg" alt="Farm Financer">
-        <p class="brand-logo">Cooking Hub</p>
+        <img class="logo" src="../../../assets/images/FarmImg.jpg" />
+        <p class="brand-logo">Farm Financer</p>
       </span>
     </div>
     <ul class="nav-links">
       <li class="admin-info"><span>Hello, {{ Username }}! Welcome back to your dashboard.</span></li>
       <li><a routerLink="/home">Home</a></li>
       <li class="dropdown" (click)="toggleDropdown($event)">
-        <a class="dropdown-toggle" href="#">Cooking Class<i class="fas fa-chevron-down arrow-icon"></i></a>
+        <a class="dropdown-toggle" href="#">Loan<i class="fas fa-chevron-down arrow-icon"></i></a>
         <ul class="dropdown-menu">
-          <li><a routerLink="/adminaddclass">Add Class</a></li>
-          <li><a routerLink="/adminviewclass">View Class</a></li>
+          <li><a routerLink="/createloan">Add Loan</a></li>
+          <li><a routerLink="/viewloan">View Loan</a></li>
         </ul>
       </li>
-      <li><a routerLink="/adminviewappliedrequest">Class Requested</a></li>
+      <li><a routerLink="/requestedloan">Loan Requested</a></li>
       <li><a routerLink="/adminviewfeedback">Feedbacks</a></li>
       <li><button class="logout-button" (click)="logout()">Logout</button></li>
     </ul>

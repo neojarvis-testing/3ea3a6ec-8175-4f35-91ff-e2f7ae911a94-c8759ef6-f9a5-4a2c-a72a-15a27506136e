@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap');
+body {
+    margin: 0;
+    font-family: 'Lora', serif;
+    color: #333;
+    background-color: #f8f8f8;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+.container {
+    display: flex;
+    height: 100vh;
+    animation: fadeIn 1s ease-in-out;
+}
+.left-section {
+    background-color: #000;
+    color: #fff;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px;
+    animation: slideInLeft 1s ease-in-out;
+}
+.branding h1 {
+    font-family: 'Lora', serif;
+    font-size: 48px;
+    margin: 0;
+    font-weight: 700;
+}
+.branding h2 {
+    font-size: 36px;
+    margin: 10px 0 0;
+    font-weight: 400;
+}
+.branding h3 {
+    font-size: 24px;
+    margin: 20px 0;
+    font-weight: 400;
+}
+.highlight {
+    text-decoration: underline;
+}
+button {
+    background-color: #ff9000;
+    color: #fff;
+    border: none;
+    padding: 15px 25px;
+    cursor: pointer;
+    font-size: 18px;
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    transition: background-color 0.3s ease;
+    animation: fadeInButton 1s ease-in-out 1.5s;
+    animation-fill-mode: backwards;
+}
+button:hover {
+    background-color: #ff7000;
+}
+.middle-section {
+    flex: 1;
+    background: url('/assets/images/FarmImg.jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    animation: fadeIn 1s ease-in-out 1s;
+    animation-fill-mode: both;
+}
+.middle-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.right-section {
+    background-color: #fff;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px;
+    animation: slideInRight 1s ease-in-out;
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+nav ul li {
+    margin: 15px 0;
+}
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 20px;
+    font-family: 'Lora', serif;
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+nav ul li a:hover {
+    color: #ff9000;
+    font-weight: 700;
+}
+.right-section img {
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+.finance {
+    font-family: 'Lora', serif;
+    font-size: 60px;
+    color: rgba(0, 0, 0, 0.05);
+    text-align: center;
+    margin-top: auto;
+    animation: fadeIn 1s ease-in-out 1.5s;
+    animation-fill-mode: backwards;
+}
+.extra-info {
+    padding: 40px;
+    background-color: #fff;
+    margin: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 1s ease-in-out;
+}
+.extra-info h2 {
+    font-family: 'Lora', serif;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+.extra-info p {
+    font-family: 'Lora', serif;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+.extra-info ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+.extra-info ul li {
+    font-family: 'Lora', serif;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeInButton {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
