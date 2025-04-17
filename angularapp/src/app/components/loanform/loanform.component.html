@@ -1,59 +1,54 @@
-<div class="loan-form">
+<app-usernav></app-usernav>
+<div class="add-request-container">
+  <div class="header">
     <h2>Loan Application Form</h2>
-   
-    <form [formGroup]="loanForm" (ngSubmit)="onSubmit()">
-      <div>
-        <label>Farm Location*</label>
-        <input formControlName="farmLocation" type="text" />
-        <div *ngIf="submitted && loanForm.controls.farmLocation.errors">
-          Farm Location is required
-        </div>
-      </div>
-   
-      <div>
-        <label>Farmer's Address*</label>
-        <input formControlName="farmerAddress" type="text" />
-        <div *ngIf="submitted && loanForm.controls.farmerAddress.errors">
-          Farmer's Address is required
-        </div>
-      </div>
-   
-      <div>
-        <label>Farm Size (in acres)*</label>
-        <input formControlName="farmSize" type="number" />
-        <div *ngIf="submitted && loanForm.controls.farmSize.errors">
-          Farm Size is required
-        </div>
-      </div>
-   
-      <div>
-        <label>Farm Purpose*</label>
-        <input formControlName="farmPurpose" type="text" />
-        <div *ngIf="submitted && loanForm.controls.farmPurpose.errors">
-          Farm Purpose is required
-        </div>
-      </div>
-   
-      <div>
-        <label>Proof*</label>
-        <input type="file" (change)="onFileChange($event)" />
-        <div *ngIf="submitted && !proofFile">
-          Proof is required
-        </div>
-      </div>
-   
-      <div *ngIf="submitted && loanForm.invalid && !proofFile" style="color:red;">
-        All fields are required
-      </div>
-   
-      <button type="submit">Submit</button>
-      <button type="button" (click)="goBack()">Back</button>
-    </form>
-   
-    <div *ngIf="showSuccessPopup" class="popup">
-      <p>Successfully Submitted!</p>
-      <button (click)="redirectToUserView()">Ok</button>
-    </div>
+    <button class="btn btn-secondary back-button" (click)="goBack()">Back</button>
   </div>
+  <form (ngSubmit)="onSubmit(loanaForm)" #loanaForm="ngForm">
+    <div class="form-group">
+      <label for="FarmLocation">Farm Location<span class="required">*</span></label>
+      <input type="text" id="FarmLocation" [(ngModel)]="loana.FarmLocation" name="FarmLocation" required>
+      <div *ngIf="loanaForm.submitted && !loana.FarmLocation" class="validation-message">
+        Farm Location is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="FarmerAddress">Farmer's Address<span class="required">*</span></label>
+      <input type="text" id="FarmerAddress" [(ngModel)]="loana.FarmerAddress" name="FarmerAddress" required>
+      <div *ngIf="loanaForm.submitted && !loana.FarmerAddress" class="validation-message">
+        Farmer Address is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="FarmSizeInAcres">Farm Size (in Acres)<span class="required">*</span></label>
+      <input type="number" id="FarmSizeInAcres" [(ngModel)]="loana.FarmSizeInAcres" name="FarmSizeInAcres" min="1"  required>
+      <div *ngIf="loanaForm.submitted && !loana.FarmSizeInAcres" class="validation-message">
+        Farm Size In Acres is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="FarmPurpose">Farm Purpose<span class="required">*</span></label>
+      <input type="text" id="FarmPurpose" [(ngModel)]="loana.FarmPurpose" name="FarmPurpose" required>
+      <div *ngIf="loanaForm.submitted && !loana.FarmPurpose" class="validation-message">
+        Farm Purpose are required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="File">Proof<span class="required">*</span></label>
+      <input type="file" id="File" [(ngModel)]="loana.File" name="File" required>
+      <div *ngIf="loanaForm.submitted && !loana.File" class="validation-message">
+        Proof is required.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>
+<!-- Popup Modal -->
+<div *ngIf="showPopup" class="popup">
+  <div class="popup-content">
+    <p>Successfully Submitted!</p>
+    <button (click)="closePopup()">Ok</button>
+  </div>
+</div>
 
    

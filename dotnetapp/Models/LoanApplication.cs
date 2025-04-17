@@ -12,13 +12,11 @@ namespace dotnetapp.Models
         [Required(ErrorMessage = "User ID is required.")]
         public int UserId { get; set; }
 
-        [JsonIgnore]
         public User? User { get; set; }
 
         [Required(ErrorMessage = "Loan ID is required.")]
         public int LoanId { get; set; } 
 
-        [JsonIgnore]
         public Loan? Loan { get; set; }
 
         [Required(ErrorMessage = "Submission date is required.")]

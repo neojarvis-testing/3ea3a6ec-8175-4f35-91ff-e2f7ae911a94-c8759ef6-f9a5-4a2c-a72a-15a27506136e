@@ -18,7 +18,8 @@ import { AdmineditloanComponent } from './components/admineditloan/admineditloan
 import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
 import { ErrorComponent } from './components/error/error.component';
 import { LandingComponent } from './components/landing/landing.component';
-import { AuthGuard } from './components/authguard/auth.guard';
+import { AuthGuard } from './components/authguard/authguard.guard';
+
 
 const routes: Routes = [{path:'',component:LandingComponent},
 { path: 'home', component: HomeComponent },

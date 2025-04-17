@@ -39,7 +39,7 @@ export class LoanService {
   }
 
   getAppliedLoans(userId: number): Observable<LoanApplication[]> {
-    return this.http.get<LoanApplication[]>(`${this.apiUrl}/LoanApplication/GetLoanApplicationsByUserId/${userId}`, { headers: this.getAuthHeaders(), responseType: 'text' as 'json' });
+    return this.http.get<LoanApplication[]>(`${this.apiUrl}/LoanApplication/GetLoanApplicationsByUserId/${userId}`, { headers: this.getAuthHeaders()});
   }
 
   deleteLoanApplication(loanId: number): Observable<void> {

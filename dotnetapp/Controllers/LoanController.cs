@@ -20,7 +20,7 @@ namespace dotnetapp.Controllers{
         {
             _loanService = loanService;
         }
-        [Authorize(Roles= "Admin")]
+        [Authorize(Roles= "Admin,User")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Loan>>> GetAllLoans()
         {
