@@ -1,4 +1,3 @@
-import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoanApplication } from 'src/app/models/loanapplication.model';
@@ -12,6 +11,7 @@ import { LoanService } from 'src/app/services/loan.service';
 export class RequestedloanComponent implements OnInit {
 
   loanApplications:LoanApplication[]=[]
+  selectedLoanApplication: LoanApplication | null = null;
 
   constructor(private loanService:LoanService, private router:Router) { }
 
@@ -22,28 +22,30 @@ export class RequestedloanComponent implements OnInit {
   public getAllApplicationLoans(){
     return this.loanService.getAllLoanApplications().subscribe(data=>{
       this.loanApplications=data;
-    }, error=>{
-      this.router.navigate(['/error'])
-    })
+    });
   }
 
   public changeStatusToApproved(id:number, la:LoanApplication){
     la.LoanStatus=1;
     return this.loanService.updateLoanStatus(id, la).subscribe(data=>{
       this.getAllApplicationLoans();
-    }, error=>{
-      this.router.navigate(['/error'])
-    })
+    });
   }
 
   public changeStatusToRejected(id:number, la:LoanApplication){
     la.LoanStatus=2;
     return this.loanService.updateLoanStatus(id, la).subscribe(data=>{
       this.getAllApplicationLoans();
-    }, error=>{
-      this.router.navigate(['/error'])
-    })
+    });
   }
+  public showDetails(la: LoanApplication) {
+    this.selectedLoanApplication = la;
+  }
+
+  public closeModal() {
+    this.selectedLoanApplication = null;
+  }
+
 }
 
 

@@ -1,7 +1,8 @@
 <app-adminnav></app-adminnav>
-<div class="container">
-  <h2 style="text-align: center;">Loan Requests for Approval</h2>
-  <table class="table table-striped">
+<div class="view-feedback">
+  <h1>Loan Requests for Approval</h1>
+  <div class="underline"></div>
+  <table class="table-content">
       <thead>
           <tr>
               <th>S.No</th>
@@ -27,13 +28,25 @@
                   <span *ngIf="la.LoanStatus==2">Rejected</span>
               </td>
               <td>
-                  <button class="btn btn-primary">Show More</button>
-                  <button class="btn btn-success" *ngIf="la.LoanStatus!=1" (click)="changeStatusToApproved(la.LoanApplicationId, la)">Approve</button>
-                  <button class="btn btn-danger" *ngIf="la.LoanStatus!=2" (click)="changeStatusToRejected(la.LoanApplicationId, la)">Reject</button>
+                <div class="button-container">
+                  <button class="btn-info" (click)="showDetails(la)" >Show</button>
+                  <button class="btn-success" *ngIf="la.LoanStatus!=1" (click)="changeStatusToApproved(la.LoanApplicationId, la)">Approve</button>
+                  <button class="btn-danger" *ngIf="la.LoanStatus!=2" (click)="changeStatusToRejected(la.LoanApplicationId, la)">Reject</button>
+                </div>
               </td>
           </tr>
       </tbody>
   </table>
+  <div *ngIf="selectedLoanApplication" class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">&times;</span>
+      <h2>Farmer Details</h2>
+      <p><strong>Address:</strong> {{selectedLoanApplication.FarmerAddress}}</p>
+      <p><strong>Proof:</strong> {{selectedLoanApplication.File}}</p>
+      <!-- <img [src]="selectedLoanApplication.ProofImage" alt="Proof Image" /> -->
+    </div>
+  </div>
+  
 </div>
 
  
