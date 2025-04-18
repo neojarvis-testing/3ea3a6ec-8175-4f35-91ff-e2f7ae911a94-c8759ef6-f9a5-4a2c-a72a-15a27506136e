@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoanApplication } from 'src/app/models/loanapplication.model';
 import { LoanService } from 'src/app/services/loan.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-userappliedloan',
@@ -28,7 +29,7 @@ export class UserappliedloanComponent implements OnInit {
   userId = +(localStorage.getItem('userId'));
   showViewModal : boolean = false;
   currentPage: number = 1;
-  itemsPerPage: number = 10;
+  itemsPerPage: number = 5;
   searchTerm: string = '';
 
   constructor(private loanApp : LoanService, private router : Router) { }
@@ -38,11 +39,25 @@ export class UserappliedloanComponent implements OnInit {
   }
 
   fetchAlloanApplicationsOfUser(){
+    Swal.fire({
+      title: 'Loading your loan applications...',
+      text: 'Please wait',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading(); // Start the loading spinner
+      }
+    });  
     this.loanApp.getAppliedLoans(this.userId).subscribe(d=>{
       this.loanApplicationList = d;
       this.filteredLoans = d;
       this.updatePagination();
-    });
+      Swal.close();
+    },
+    (error) => {
+      Swal.close(); // Close the spinner in case of an error
+      Swal.fire('Error', 'No Loan Application to load.', 'error');
+    }
+);
   }
   searchLoans(): void {
     if (this.searchTerm) {

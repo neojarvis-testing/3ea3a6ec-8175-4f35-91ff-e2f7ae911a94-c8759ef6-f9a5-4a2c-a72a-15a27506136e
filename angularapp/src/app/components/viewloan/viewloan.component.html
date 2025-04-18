@@ -32,7 +32,7 @@
         <td>
           <div class="button-container">
             <button (click)="editLoan(loan.LoanId)" class="btn-edit">Edit</button>
-            <button (click)="confirmDelete(loan.LoanId)" class="btn-delete">Delete</button>
+            <button (click)="confirmDelete(loan.LoanId)" [disabled]="isDeleteDisabled(loan.LoanId)"  class="btn-delete">Delete</button>
           </div>
         </td>
       </tr>

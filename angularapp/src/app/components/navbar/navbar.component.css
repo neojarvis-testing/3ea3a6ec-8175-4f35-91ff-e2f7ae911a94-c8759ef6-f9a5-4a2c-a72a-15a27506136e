@@ -19,14 +19,16 @@
 }
  
 .logo {
-  height: 40px;
+  height: 80px;
   margin-right: 10px;
+  border-radius: 65px;
+  font-weight: bold;
 }
- 
+
 .brand-logo {
   color: white;
   font-size: 1.5em;
-  font-weight: bold;
+  
 }
  
 .navigation {
@@ -96,7 +98,7 @@
 .dropdown:hover .dropdown-content {
   display: block;
 }
-
+ 
 a {
   text-decoration: none;
   color: white;
@@ -104,7 +106,7 @@ a {
   border-radius: 8px;
   transition: background-color 0.3s ease;
 }
-
+ 
 a:hover {
   background-color: #005f61;
   color:#ffffff;
@@ -200,4 +202,3 @@ a:hover {
     transform: translateY(0);
   }
 }
- 

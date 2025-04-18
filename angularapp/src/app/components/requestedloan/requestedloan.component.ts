@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoanApplication } from 'src/app/models/loanapplication.model';
 import { LoanService } from 'src/app/services/loan.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-requestedloan',
   templateUrl: './requestedloan.component.html',
@@ -20,8 +20,21 @@ export class RequestedloanComponent implements OnInit {
   }
 
   public getAllApplicationLoans(){
-    return this.loanService.getAllLoanApplications().subscribe(data=>{
+    Swal.fire({
+      title: 'Loading loan applications...',
+      text: 'Please wait',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    });
+      this.loanService.getAllLoanApplications().subscribe(data=>{
       this.loanApplications=data;
+      Swal.close();
+    },
+    (error) => {
+      Swal.close(); // Close spinner in case of error
+      Swal.fire('Error', 'No requested loans to load.', 'error');
     });
   }
 

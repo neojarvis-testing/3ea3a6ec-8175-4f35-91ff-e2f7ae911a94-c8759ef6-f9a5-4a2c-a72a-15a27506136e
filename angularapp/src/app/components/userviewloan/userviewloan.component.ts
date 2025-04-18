@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Loan } from 'src/app/models/loan.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoanService } from 'src/app/services/loan.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-userviewloan',
   templateUrl: './userviewloan.component.html',
@@ -16,7 +17,7 @@ export class UserviewloanComponent implements OnInit {
   searchTerm: string = '';
   // Pagination variables
   currentPage: number = 1;
-  loansPerPage: number = 10;
+  loansPerPage: number = 5;
   constructor(
     private loanService: LoanService,
     private authService: AuthService,
@@ -29,13 +30,24 @@ export class UserviewloanComponent implements OnInit {
     this.loadAppliedLoans();
   }
   loadLoans(): void {
+    Swal.fire({
+      title: 'Loading loans...',
+      text: 'Please wait',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading(); // Start the loading spinner
+      }
+    });  
     this.loanService.getAllLoans().subscribe(
       (data) => {
         this.Loans= data;
         this.updateFilteredLoans();
+        Swal.close();
       },
       (error) => {
         console.error('Error fetching loans:', error);
+        Swal.close(); // Close spinner on error
+      Swal.fire('Error', 'No Loans to Load.', 'error');
       }
     );
   }

@@ -6,25 +6,42 @@ form {
     background-color: #f4f4f4;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: #f7f7f7;
+    background: linear-gradient(to right, #f7f7f7, #e8f5e9);
+    border: 2px solid black;
+    border-radius: 10px;
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.2);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
 }
 h1 {
     text-align: center;
-    color: #333;
+    color: #003366;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    font-weight: 700;
 }
 /* Label styling */
 label {
+    margin-bottom: 8px;
     font-weight: bold;
+    color: #333;
     display: block;
-    margin-top: 10px;
+    font-size: 1.3em;
 }
 /* Input and select styling */
 input[type="text"], input[type="number"], select {
     width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 20px;
+    padding: 12px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 5px;
+    margin-top: 5px;
+    font-size: 1.2em;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid #090000;
 }
 /* Error message styling */
 small {
@@ -108,3 +125,26 @@ label span {
 .ok-button:hover {
     background: #003366;
 }
+ 
+textarea {
+    border: 2px solid #090000;
+    width: 100%;
+}
+label{
+    font-size: 22px;
+}
+small{
+    font-size: 18px;
+}
+ 
+.error {
+    color: red;
+    font-size: 1em; /* Slightly larger font size for better visibility */
+    margin-top: 10px; /* Increased margin for better spacing */
+    padding: 10px; /* Added padding for a cleaner look */
+    border: 1px solid red; /* Border to highlight the error */
+    background-color: #ffe6e6; /* Light red background for emphasis */
+    border-radius: 5px; /* Rounded corners for a modern look */
+    font-weight: bold; /* Bold text for importance */
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.2); /* Subtle shadow for depth */
+   }

@@ -8,17 +8,20 @@ body {
     padding: 0;
 }
 .view-feedback {
+    background: linear-gradient(to right, #f7f7f7, #e8f5e9);
+ 
     max-width: 1200px;
     margin: 2rem auto;
     padding: 2rem;
     background-color: #ffffff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+   
 }
 h1 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: #2c3e50;
+    color: #1b5e20;
     text-align: center;
     font-family: 'Poppins', sans-serif;
 }
@@ -45,6 +48,7 @@ h1 {
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s ease;
 }
+ 
 .search-container input[type="text"]:focus {
     border-color: #1abc9c;
     outline: none;
@@ -56,7 +60,7 @@ table {
     font-size: 1rem;
 }
 table thead tr {
-    background-color: #ecf0f1;
+    background-color: #1b5e20;
 }
 table th, table td {
     padding: 0.75rem 1rem;
@@ -64,7 +68,7 @@ table th, table td {
 }
 table th {
     font-weight: 600;
-    color: #2c3e50;
+    color: white;
     font-family: 'Poppins', sans-serif;
 }
 table tr:nth-child(even) {
@@ -214,7 +218,7 @@ button:disabled {
     margin: 0 5px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    background-color: #3498db;
+    background-color: #1b5e20;
     color: white;
     cursor: pointer;
     transition: background 0.3s ease;

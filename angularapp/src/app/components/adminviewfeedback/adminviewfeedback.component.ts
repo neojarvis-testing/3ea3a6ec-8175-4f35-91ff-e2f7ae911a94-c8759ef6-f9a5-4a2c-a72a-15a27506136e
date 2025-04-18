@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FeedbackService } from 'src/app/services/feedback.service';
 import { Feedback } from 'src/app/models/feedback.model';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-adminviewfeedback',
   templateUrl: './adminviewfeedback.component.html',
@@ -17,13 +18,21 @@ export class AdminviewfeedbackComponent implements OnInit {
   Username: string = '';
   // Pagination properties
   currentPage: number = 1;
-  itemsPerPage: number = 10;
+  itemsPerPage: number = 5;
   constructor(private feedbackService: FeedbackService, private router: Router) { }
   ngOnInit(): void {
     this.loadFeedbacks();
     this.Username = localStorage.getItem('userName');
   }
   loadFeedbacks(): void {
+    Swal.fire({
+      title: 'Loading feedbacks...',
+      text: 'Please wait',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    });
     this.feedbackService.getFeedbacks().subscribe(
       (data) => {
         console.log('Loading feedbacks...');
@@ -33,10 +42,13 @@ export class AdminviewfeedbackComponent implements OnInit {
         if (this.feedbacks.length === 0) {
           this.errorMessage = 'No data found';
         }
+        Swal.close();
       },
       (error) => {
         console.error('Error fetching feedbacks:', error);
         this.errorMessage = 'Failed to load feedbacks.';
+        Swal.close();
+        Swal.fire('Error','No feedback to load','error');  
       }
     );
   }

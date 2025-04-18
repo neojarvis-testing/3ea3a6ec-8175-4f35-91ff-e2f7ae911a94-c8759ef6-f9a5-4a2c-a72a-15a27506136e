@@ -8,12 +8,11 @@ body {
     padding: 0;
 }
 .view-feedback {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background-color: #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+  /* max-width: 1200px; */
+  margin: 2rem auto;
+  padding: 2;
+  margin-top: 10rem;
+  background-color: #e0f2f1;
 }
 h1 {
     font-size: 2.5rem;
@@ -54,9 +53,10 @@ table {
     border-collapse: collapse;
     margin-bottom: 1rem;
     font-size: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add border shadow */
 }
 table thead tr {
-    background-color: #ecf0f1;
+    background-color: #1b5e20; /* Match the header color */
 }
 table th, table td {
     padding: 0.75rem 1rem;
@@ -64,11 +64,15 @@ table th, table td {
 }
 table th {
     font-weight: 600;
-    color: #2c3e50;
+    color: white; /* Match the header text color */
     font-family: 'Poppins', sans-serif;
 }
 table tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #f2f2f2; /* Match the even row color */
+}
+table tr:hover {
+    background-color: #c8e6c9; /* Match the hover color */
+    transition: background-color 0.3s ease;
 }
 button {
     padding: 0.5rem 1rem;
@@ -81,7 +85,7 @@ button {
 }
 /* Updated styles for buttons */
 button.btn-show {
-    background-color: #28a745; 
+    background-color: #28a745;
     width: 80px;
     margin-right: 5px; /* Add margin to separate the buttons */
 }
@@ -187,7 +191,7 @@ button:disabled {
 .modal-content button.btn-cancel:hover {
   background-color: #c0392b;
 }
-
+ 
 .pagination-controls {
   display: flex;
   justify-content: center;
