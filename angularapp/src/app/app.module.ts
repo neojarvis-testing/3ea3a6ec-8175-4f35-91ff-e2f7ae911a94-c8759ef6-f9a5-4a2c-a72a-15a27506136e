@@ -24,6 +24,7 @@ import { UserviewloanComponent } from './components/userviewloan/userviewloan.co
 import { ViewloanComponent } from './components/viewloan/viewloan.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LandingComponent } from './components/landing/landing.component';
+import { DeleteButtonRendererComponent } from './components/delete-button-renderer/delete-button-renderer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +47,7 @@ import { LandingComponent } from './components/landing/landing.component';
     ViewloanComponent,
     FooterComponent,
     LandingComponent,
+    DeleteButtonRendererComponent,
   ],
   imports: [
     BrowserModule,

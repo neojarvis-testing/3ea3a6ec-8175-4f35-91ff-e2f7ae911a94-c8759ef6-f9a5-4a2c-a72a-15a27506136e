@@ -12,12 +12,22 @@ export class LoginComponent {
   passwordFieldType: string = 'password';
   constructor(private authService: AuthService, private router: Router) { }
   onLogin(): void {
+    Swal.fire({
+      title: 'Logging in...',
+      text: 'Please wait while we process your request.',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading(); // Display the spinner
+      }
+    });
+
     this.authService.login(this.credentials).subscribe({
       next: (response: any) => {
         localStorage.setItem('token', response.token);
         const role = this.authService.getUserRoleFromToken(response.token);
         localStorage.setItem('userRole', role);
-  
+        
+        Swal.close();
         // Navigate to the role-specific route
         if (role) {
           if (role.toLowerCase() === 'admin') {
@@ -36,6 +46,8 @@ export class LoginComponent {
         }
       },
       error: () => {
+        Swal.close();
+        
         Swal.fire({
           title: 'Error!',
           text: 'Invalid credentials. Please try again.',
