@@ -125,7 +125,7 @@
   padding: 20px;
   background-color: #e3d1a2;
   /* background-color: #e3d1a2; */
-  background-image: url('/assets/images/backgroundimage.jpg');
+  background-image: url('/assets/images/home2.jpg');
  
   /* opacity: 0.5; */
 }
@@ -136,7 +136,7 @@
   align-items: center;
   padding: 20px;
   background-color: #e3d1a2;
-  background-image: url('/assets/images/backgroundimage.jpg');
+  background-image: url('/assets/images/home2.jpg');
   background-size: cover; /* Ensures the image covers the entire viewport */
   background-position: center; /* Centers the image */
   background-repeat: no-repeat; /* Prevents the image from repeating */
@@ -146,7 +146,7 @@
  
 .admin-image::before {
   content: "";
-  background-image: url('/assets/images/backgroundimage.jpg');
+  background-image: url('/assets/images/home2.jpg');
   background-size: cover; /* Ensures the image covers the entire viewport */
   background-position: center; /* Centers the image */
   background-repeat: no-repeat; /* Prevents the image from repeating */
