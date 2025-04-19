@@ -5,21 +5,30 @@ body {
     margin: 0;
     padding: 0;
 }
+ 
 /* Container and Header */
 .container {
     max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
-    background: white;
+    background: linear-gradient(to right, #f7f7f7, #e8f5e9); /* Updated background color */
     border: 1px solid #ccc;
+    font-size: 2rem;
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
+    margin-top: 10rem;
+    margin-bottom: 10rem;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
 }
+ 
 .container h2 {
-    color: #003366;
+    color: #1b5e20;
+    font-size: 3rem;
     margin: 20px 0;
 }
+ 
 /* Table Styles */
 table {
     width: 100%;
@@ -27,38 +36,45 @@ table {
     border-collapse: collapse;
     font-size: 16px;
 }
+ 
 table th,
 table td {
     padding: 10px;
     border: 1px solid #ddd;
     text-align: left;
 }
+ 
 table th {
-    background-color: #003366; /* Navy blue color */
+    background-color: #1b5e20; 
     color: white;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
+ 
 table td {
     background-color: #f9f9f9;
 }
+ 
 /* Action Buttons */
 button {
     padding: 10px 20px;
-    background-color: #04396e;
+    background-color: #1b5e20;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background 0.3s ease;
 }
+ 
 button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }
+ 
 button:hover {
-    background-color: #096ad2; /* Slightly darker blue on hover */
+    background-color: #1b5e20; /* Slightly darker blue on hover */
 }
+ 
 /* Profile Modal */
 .modal {
     position: fixed;
@@ -74,9 +90,11 @@ button:hover {
     max-width: 500px;
     border-radius: 5px;
 }
+ 
 .modal-content {
     padding: 20px;
 }
+ 
 .close-btn {
     color: #aaa;
     float: right;
@@ -84,11 +102,13 @@ button:hover {
     font-weight: bold;
     cursor: pointer;
 }
+ 
 .close-btn:hover,
 .close-btn:focus {
     color: black;
     text-decoration: none;
 }
+ 
 /* No Records Found */
 .no-records {
     text-align: center;
@@ -96,16 +116,20 @@ button:hover {
     padding: 20px;
     color: #333;
 }
+ 
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
         padding: 10px;
     }
+ 
     table th,
     table td {
         padding: 8px;
     }
+ 
     button {
         padding: 8px 16px;
     }
 }
+ 

@@ -4,21 +4,23 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: black; /* Changed background color to black */
-  padding: 0.5rem 1rem;
+  background: linear-gradient(90deg, #1b5e20, #0d3c0e); /* Changed background to gradient */
+  padding: 10px 20px; /* Adjusted padding */
   color: white;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjusted box-shadow */
 }
 .logo {
-  width: 80px;
+  width: 105px;
   height: 80px;
+  margin-right: 10px; /* Added margin */
+  border-radius: 65px; /* Added border-radius */
+  font-weight: bold; /* Added font-weight */
 }
 .brand-logo {
   font-family: cursive;
-  color: white; /* Corrected the typo */
-  font-size: 2rem; /* Reduced font size */
-  margin-left: 20px; /* Adjust this value to move it to the right */
+  color: white;
+  font-size: 1.5em; /* Adjusted font size */
 }
 .navbar-header {
   display: flex;
@@ -29,9 +31,12 @@
   align-items: center;
 }
 .user-info {
-  font-size: 0.7rem; /* Reduced font size */
-  font-style: italic;
-  margin-right: 20px; /* Add margin to separate from other items */
+  font-size: 1em; /* Adjusted font size */
+  color: white; /* Changed color */
+  margin-left: 20px; /* Adjusted margin */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 .nav-links {
   display: flex;
@@ -42,21 +47,23 @@
 }
 .nav-links li {
   position: relative;
+  margin-left: 20px; /* Added margin */
 }
 .nav-links a,
 .logout-button {
   color: white;
   text-decoration: none;
   font-family: "Poppins", sans-serif;
-  font-size: 12px; /* Reduced font size */
-  padding: 5px 10px; /* Consistent padding for all items */
+  font-size: 12px;
+  padding: 10px 15px; /* Adjusted padding */
   border-radius: 4px;
-  transition: color 0.3s ease, background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Adjusted transition */
 }
 .nav-links a:hover,
 .logout-button:hover {
-  color: black;
-  background-color: #f0f0f0;
+  background-color: #0d3c0e; /* Changed background color */
+  border-radius: 4px;
+  transform: scale(1.05); /* Added transform */
 }
 .admin-info span {
   color: white;
@@ -67,15 +74,19 @@
 .dropdown-menu {
   display: none;
   position: absolute;
-  background-color: #f94d6b;
+  background-color: white; /* Changed background color */
   list-style: none;
   margin-top: 0.5rem;
   padding: 0.5rem 0;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adjusted box-shadow */
   z-index: 1000;
   transition: all 0.3s ease;
   opacity: 0;
   transform: translateY(-10px);
+  border-radius: 4px; /* Added border-radius */
+  overflow: hidden; /* Added overflow */
+  left: 0;
+  min-width: 160px; /* Added min-width */
 }
 .dropdown:hover .dropdown-menu {
   display: block;
@@ -87,14 +98,16 @@
   padding: 0;
 }
 .dropdown-menu a {
-  color: white;
+  color: #1b5e20; /* Changed color */
   text-decoration: none;
   display: block;
-  padding: 0.5rem 1rem;
+  padding: 10px 20px; /* Adjusted padding */
   white-space: nowrap;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Adjusted transition */
 }
 .dropdown-menu a:hover {
-  background-color: #e04655;
+  background-color: #c8e6c9; /* Changed background color */
+  transform: scale(1.05); /* Added transform */
 }
 .arrow-icon {
   transition: transform 0.3s ease;
@@ -104,20 +117,20 @@
   transform: rotate(180deg);
 }
 .logout-button {
-  background-color: white;
-  color: red;
+  background-color: #d32f2f; /* Changed background color */
+  color: white;
   border: none;
   cursor: pointer;
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 18px; /* Reduced font size */
-  padding: 10px 15px; /* Increased padding */
+  font-size: 18px;
+  padding: 10px 20px; /* Adjusted padding */
   border-radius: 4px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  margin-top: -10px; /* Adjust this value to move the button higher */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Adjusted transition */
+  margin-top: -10px;
 }
 .logout-button:hover {
-  background-color: #f0f0f0;
-  color: darkred;
+  background-color: #b71c1c; /* Changed background color */
+  transform: scale(1.05); /* Added transform */
 }
 .modal {
   display: flex;
@@ -130,13 +143,15 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   z-index: 1000;
+  animation: fadeIn 0.3s ease; /* Added animation */
 }
 .modal-content {
   background: white;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px; /* Adjusted padding */
+  border-radius: 8px; /* Adjusted border-radius */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
+  animation: slideIn 0.3s ease; /* Added animation */
 }
 .modal-content button {
   margin: 0 10px;
@@ -144,18 +159,45 @@
   padding: 10px;
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 1.2rem;
+  background-color: #1b5e20; /* Changed background color */
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Adjusted transition */
+}
+.modal-content button:hover {
+  background-color: #0d3c0e; /* Changed background color */
+  transform: scale(1.05); /* Added transform */
 }
 .yes-logout-button {
-  background-color: red; /* Red background */
-  color: white; /* White text */
-  border: 1px solid red; /* Same border as Cancel button */
+  background-color: #d32f2f; /* Changed background color */
+  color: white;
+  border: 1px solid red;
   padding: 10px;
   border-radius: 8px;
   cursor: pointer;
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 2.5rem;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Adjusted transition */
 }
 .yes-logout-button:hover {
-  background-color: darkred;
+  background-color: #b71c1c; /* Changed background color */
+  transform: scale(1.05); /* Added transform */
+}
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
