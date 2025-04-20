@@ -3,7 +3,7 @@
   <h1>Loan Details</h1>
   <div class="underline"></div>
   <div class="search-container">
-    <input type="text" id="search" name="search" placeholder="Search by Loan Type" [(ngModel)]="searchTerm"
+    <input type="text" id="search" name="search" placeholder="Search" [(ngModel)]="searchTerm"
       (ngModelChange)="searchLoans()" (input)="searchLoans()">
   </div>
   <table *ngIf="paginatedLoans.length > 0; else noRecords" class="table-content">
